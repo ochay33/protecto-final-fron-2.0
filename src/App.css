@@ -1,42 +1,58 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+nav a {
+	color: white;
+	padding: 0.4rem 0.6rem;
+	text-decoration: none;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+nav a.active {
+	color: palevioletred;
+	font-weight: bolder;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dropdown a {
+	color: black;
+	display: block;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.dropdown div {
+	width: 230px;
 }
 
-.card {
-  padding: 2em;
+#cards {
+	gap: 1rem;
 }
 
-.read-the-docs {
-  color: #888;
+.img-wrapper {
+	height: 200px;
+	overflow: hidden;
+}
+
+#descriptione.card-text {
+	height: 120px;
+}
+
+#admin form div {
+	margin-bottom: 1rem;
+}
+
+#admin form div input,
+#admin form div textarea {
+	width: 700px;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+#admin form div label {
+	margin-right: 1rem;
+	width: 120px;
+}
+
+input.error {
+	border: 1px solid red;
+	background-color: #ffaaaa;
+}
+
+.errorMessage {
+	color: red;
+	padding-top: 5px;
 }
