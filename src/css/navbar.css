@@ -1,0 +1,21 @@
+body {
+    background: transparent;
+}
+.nav-header{
+    padding: 3rem;
+    /* box-shadow: -1px 10px 13px -4px #848484; */
+    height: 120px;
+   
+box-shadow: 1px 5px 16px -4px #6D6D6D;
+}
+
+.items{
+    color:black;
+}
+.items:hover{
+    text-decoration: none;
+    color:black;
+}
+.me-auto{
+    background-color: transparent;
+}

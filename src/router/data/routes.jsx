@@ -1,11 +1,11 @@
-import { Login } from "../../views/Login"
-import { Home } from "../../views/Home"
-import { Registro } from "../../views/Registro"
-import { Menues } from "../../views/Menues"
-import { Administrator } from "../../views/Administrator"
-import { Menu } from "../../views/Menu"
-import { IsLogged } from "../../components/IsLogged"
-import { IsAdmin } from "../../components/IsAdmin"
+import { Login } from "../../views/Login/Login"
+import { Home } from "../../views/Home/Home"
+import { Registro } from "../../views/Registro/Registro"
+import { Menues } from "../../views/Menues/Menues"
+import { Administrador } from "../../views/Administrador/Administrador"
+import { Menu } from "../../views/Menu/Menu"
+import { IsLogged } from "../../components/IsLogged/IsLogged"
+import { IsAdmin } from "../../components/IsAdmin/IsAdmin"
 
 export const routes = [
 	{ path: "/", element: <Home /> },
@@ -21,10 +21,10 @@ export const routes = [
 	{ path: "/registro", element: <Registro /> },
 	{ path: "/menu/:menuId", element: <Menu /> },
 	{
-		path: "administrator",
+		path: "administrador",
 		element: (
 			<IsAdmin>
-				<Administrator />
+				<Administrador />
 			</IsAdmin>
 		),
 	},

@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/Nav"
 import NavDropdown from "react-bootstrap/NavDropdown"
 import Navbar from "react-bootstrap/Navbar"
 import Button from "react-bootstrap/Button"
+import logo2 from "../../img/logo2.png"
 
 const getMenues = async () => {
 	const resp = await axios(
@@ -32,9 +33,9 @@ export const NavBar = () => {
 	}
 
 	return (
-		<Navbar bg="primary" variant="dark">
+		<Navbar >
 			<Container>
-				<Navbar.Brand href="#home">Mila Nadir  Sanguches & mas</Navbar.Brand>
+				<Navbar.Brand href="#home"><img src={ logo2 } width={100} /></Navbar.Brand>
 				<Nav className="me-auto">
 					<NavLink to="/">Home</NavLink>
 					{!localStorage.getItem("user") && (
@@ -45,7 +46,7 @@ export const NavBar = () => {
 					)}
 					<NavLink to="/menues">Menues</NavLink>
 					{localStorage.getItem("user") && (
-						<NavDropdown title="Cursos" id="basic-nav-dropdown">
+						<NavDropdown title="Menues" id="basic-nav-dropdown">
 							{menues?.map(menu => (
 								<NavLink key={menu.id} to={`/menu/${menu.id}`}>
 									{menu.title}
