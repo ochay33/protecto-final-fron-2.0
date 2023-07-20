@@ -1,0 +1,29 @@
+.home-container{
+    margin-top: 100px;
+ }
+ 
+ .home-container h1{
+    line-height:1.5;
+ }
+ 
+ .home-container img{
+    width: 100%;
+   
+ }
+ 
+ .text-grey{
+    color:grey;
+    margin-top: 20px;
+ }
+ 
+ .parrafito{
+  
+    text-align: center;
+   
+ }
+ body {
+    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../img/home3.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }

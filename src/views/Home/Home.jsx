@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import Container from "react-bootstrap/Container"
 
-import home2 from "../../images/home2.png"
+import mila1 from "../../img/mila1.jpg"
 import "../../css/home.css"
 
 export const Home = () => (
@@ -16,7 +16,7 @@ export const Home = () => (
 					</Link>
 				</div>
 				<div className="col-6">
-					<img src={home2} alt="portada1" />
+					{/* <img src={mila1} alt="portada1" /> */}
 				</div>
 			</div>
 			<div className="row">
