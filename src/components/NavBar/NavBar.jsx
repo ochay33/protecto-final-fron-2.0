@@ -23,7 +23,7 @@ export const NavBar = () => {
 
 	useEffect(() => {
 		if (localStorage.getItem("user")) {
-			getCursos().then(menues => setMenues(menues))
+			getMenues().then(menues => setMenues(menues))
 		}
 	}, [])
 
@@ -35,18 +35,18 @@ export const NavBar = () => {
 	return (
 		<Navbar >
 			<Container>
-				<Navbar.Brand href="#home"><img src={ logo2 } width={100} /></Navbar.Brand>
+				<Navbar.Brand><img src={ logo2 } width={100} /></Navbar.Brand>
 				<Nav className="me-auto">
-					<NavLink to="/">Home</NavLink>
+					<NavLink to="/">Inicio</NavLink>
 					{!localStorage.getItem("user") && (
 						<>
 							<NavLink to="/login">Loguearse</NavLink>
 							<NavLink to="/registro">Registrarse</NavLink>
 						</>
 					)}
-					<NavLink to="/menues">Menues</NavLink>
+					<NavLink to="/menues">Menús</NavLink>
 					{localStorage.getItem("user") && (
-						<NavDropdown title="Menues" id="basic-nav-dropdown">
+						<NavDropdown title="" id="basic-nav-dropdown">
 							{menues?.map(menu => (
 								<NavLink key={menu.id} to={`/menu/${menu.id}`}>
 									{menu.title}
@@ -59,7 +59,7 @@ export const NavBar = () => {
 					<>
 						{localStorage.getItem("role") === "admin" && (
 							<Nav>
-								<NavLink to="/administrator">Administrador</NavLink>
+								<NavLink to="/administrador">Administrador</NavLink>
 							</Nav>
 						)}
 						<Button onClick={handleClick} variant="light">

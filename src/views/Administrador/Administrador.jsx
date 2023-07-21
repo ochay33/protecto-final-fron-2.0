@@ -2,9 +2,6 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Container from "react-bootstrap/Container"
 
-const headers = {
-	Authorization: "Bearer " + localStorage.getItem("token"),
-}
 
 export const Administrador = () => {
 	const [menues, setMenues] = useState([])
@@ -17,6 +14,9 @@ export const Administrador = () => {
 			.then(response => response.json())
 			.then(loquerecibo => setMenues(loquerecibo))
 	}, [])
+	const headers = {
+		Authorization: "Bearer " + localStorage.getItem("token"),
+	  };
 
 	const deleteMenu = async id => {
 		const resp = await axios.delete(
@@ -69,7 +69,7 @@ export const Administrador = () => {
 				detail,
 			},
 			{
-				headers: { ...headers, accept: "application/json" },
+				headers: { ...headers, accept: "application/json"},
 			}
 		)
 		const { status } = resp
@@ -102,12 +102,12 @@ export const Administrador = () => {
 
 	return (
 		<Container className="mt-4" id="admin">
-			<h1>Admin</h1>
+			<h1 style={{ color: "white"}}>Admin</h1>
 			{!showForm && (
 				<table className="table">
 					<thead className="thead-dark">
-						<tr>
-							<th scope="col">Título</th>
+						<tr style={{ color: "white"}}>
+							<th scope="col">Titulo</th>
 							<th scope="col">Detalle</th>
 							<th scope="col"></th>
 						</tr>
@@ -141,20 +141,20 @@ export const Administrador = () => {
 			<button onClick={handleCreate}>Crear nuevo</button>
 			{showForm && (
 				<form>
-					<div>
+					<div style={{ color: "white"}}>
 						<label>Título</label>
 						<input
 							type="text"
 							value={menuEditable.title}
 							onChange={event =>
-								setmenuEditable(prev => {
+								setMenuEditable(prev => {
 									return { ...prev, title: event.target.value }
 								})
 							}
 						/>
 					</div>
-					<div>
-						<label>Desc</label>
+					<div style={{ color: "white"}}>
+						<label>Descipcion</label>
 						<textarea
 							value={menuEditable.detail}
 							onChange={event =>
@@ -164,7 +164,7 @@ export const Administrador = () => {
 							}
 						></textarea>
 					</div>
-					<div>
+					<div style={{ color: "white"}}>
 						<label>Imagen</label>
 						<input
 							type="text"

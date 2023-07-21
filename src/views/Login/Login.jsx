@@ -40,7 +40,7 @@ export const Login = () => {
 				localStorage.setItem("user", JSON.stringify(data.user))
 				localStorage.setItem("role", data.user.role)
 				localStorage.setItem("token", data.token)
-				navigate("/")
+				navigate("/menues")
 			})
 			.catch(err => {
 				if (err.response.status === 401) alert("credenciales inválidas")
@@ -57,12 +57,12 @@ export const Login = () => {
 	return (
 		<Container className="mt-4">
 			<Form
-				style={{ width: 500, margin: "auto" }}
+				style={{ width: 500, margin: "auto", color: "white" }}
 				onSubmit={formik.handleSubmit}
 			>
-				<h1>Iniciar sesión</h1>
+				<h1 style={{textAlign: "center"}}>Iniciar sesión</h1>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
-					<Form.Label>Email address</Form.Label>
+					<Form.Label>Mail</Form.Label>
 					<Form.Control
 						type="email"
 						className={
@@ -79,7 +79,7 @@ export const Login = () => {
 					)}
 				</Form.Group>
 				<Form.Group className="mb-3" controlId="formBasicPassword">
-					<Form.Label>Password</Form.Label>
+					<Form.Label >Contraseña</Form.Label>
 					<Form.Control
 						name="password"
 						className={
@@ -98,7 +98,7 @@ export const Login = () => {
 					)}
 				</Form.Group>
 				<Button variant="primary" type="submit">
-					Submit
+					Loguearse
 				</Button>
 			</Form>
 		</Container>
