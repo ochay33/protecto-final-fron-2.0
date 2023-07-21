@@ -11,7 +11,9 @@ export const Menues = () => {
 	const [term, setTerm] = useState("")
 	  
 	useEffect(() => {
-		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-foods`)
+
+		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-menues`)
+
 			.then(response => response.json())
 			.then(loquerecibo => {
 				setMenues(loquerecibo)
@@ -40,7 +42,7 @@ export const Menues = () => {
 					type="text"
 					onChange={e => setTerm(e.target.value)}
 				/>
-				<button onClick={handleSearch}>Search</button>
+				<button onClick={handleSearch}>Buscar</button>
 				{term && (
 					<span
 						onClick={handleReset}

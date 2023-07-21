@@ -43,8 +43,8 @@ export const Registro = () => {
 	}
 
 	return (
-		<Container className="mt-4">
-			<h1 className="mt-4 mb-4">Registro</h1>
+		<Container className="mt-4" style={{ width: 500, margin: "auto", color: "white" }}>
+			<h1 className="mt-4 mb-4" style={{textAlign: "center"}}>Registro</h1>
 			<form>
 				{[
 					{
@@ -54,7 +54,7 @@ export const Registro = () => {
 						type: "email",
 					},
 					{
-						label: "Password",
+						label: "Contraseña",
 						name: "password",
 						value: formValues.password,
 						type: "password",
@@ -67,7 +67,7 @@ export const Registro = () => {
 					},
 				].map(input => (
 					<div className="form-group" key={input.label}>
-						<label className="text-muted">{input.label}</label>
+						<label style={{ color: "white"}}>{input.label}</label>
 						<input
 							type={input.type}
 							className="form-control"
