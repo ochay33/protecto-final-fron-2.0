@@ -10,7 +10,7 @@ import logo2 from "../../img/logo2.png"
 
 const getMenues = async () => {
 	const resp = await axios(
-		`${import.meta.env.VITE_SERVER_URI}/api/read-menues`
+		`${import.meta.env.VITE_SERVER_URI}/api/read-foods`
 	)
 	const { data } = resp
 	// console.log(data)
