@@ -37,6 +37,7 @@ export const Registro = () => {
 	}
 
 	const handleSubmit = () => {
+		console.log(formValues)
 		postUsuario()
 		setFormValues(initialValues)
 	}

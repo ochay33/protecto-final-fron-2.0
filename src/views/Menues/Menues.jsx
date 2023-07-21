@@ -11,7 +11,7 @@ export const Menues = () => {
 	const [term, setTerm] = useState("")
 	  
 	useEffect(() => {
-		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-courses`)
+		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-foods`)
 			.then(response => response.json())
 			.then(loquerecibo => {
 				setMenues(loquerecibo)
