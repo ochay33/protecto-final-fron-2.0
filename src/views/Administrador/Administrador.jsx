@@ -34,7 +34,7 @@ export const Administrador = () => {
 	}
 
 	const updateMenu = async menu => {
-		const { title, detail, id } = menu
+		const { title, detail, id,precio,categoria } = menu
 
 		const resp = await axios.put(
 			`${import.meta.env.VITE_SERVER_URI}/api/update-menu`,
@@ -43,6 +43,9 @@ export const Administrador = () => {
 				modify: {
 					title,
 					detail,
+					img,
+					precio,
+					categoria,
 				},
 			},
 			{
@@ -59,14 +62,16 @@ export const Administrador = () => {
 	}
 
 	const createMenu = async menu => {
-		const { title, detail, img, } = menu
+		const { title, detail, img,precio,categoria } = menu
 
 		const resp = await axios.post(
 			`${import.meta.env.VITE_SERVER_URI}/api/create-menu`,
 			{
 				title,
-				img,
-				detail,
+                img,
+                detail,
+                precio,
+                categoria,
 			},
 			{
 				headers: { ...headers, accept: "application/json"},
@@ -115,8 +120,8 @@ export const Administrador = () => {
 					<tbody>
 						{menues.map(menu => (
 							<tr key={menu.id}>
-								<th>{menu.title}</th>
-								<td>{menu.detail}</td>
+								<th className="letra_tabla">{menu.title}</th>
+								<td className="letra_tabla">{menu.detail}</td>
 								<td>
 									<button
 										className="btn btn-danger mr-2 mb-2"
@@ -160,6 +165,28 @@ export const Administrador = () => {
 							onChange={event =>
 								setMenuEditable(prev => {
 									return { ...prev, detail: event.target.value }
+								})
+							}
+						></textarea>
+					</div>
+					<div style={{ color: "white"}}>
+						<label>categoria</label>
+						<textarea
+							value={menuEditable.categoria}
+							onChange={event =>
+								setMenuEditable(prev => {
+									return { ...prev, categoria: event.target.value }
+								})
+							}
+						></textarea>
+					</div>
+					<div style={{ color: "white"}}>
+						<label>precio</label>
+						<textarea
+							value={menuEditable.precio}
+							onChange={event =>
+								setMenuEditable(prev => {
+									return { ...prev, precio: event.target.value }
 								})
 							}
 						></textarea>
