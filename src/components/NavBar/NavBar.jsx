@@ -7,6 +7,7 @@ import NavDropdown from "react-bootstrap/NavDropdown"
 import Navbar from "react-bootstrap/Navbar"
 import Button from "react-bootstrap/Button"
 import logo2 from "../../img/logo2.png"
+import CartIcon from '../Carrito/CartIcon'
 
 const getMenues = async () => {
 	const resp = await axios(
@@ -20,6 +21,7 @@ const getMenues = async () => {
 export const NavBar = () => {
 	const [menues, setMenues] = useState()
 	const navigate = useNavigate()
+	const [cartItems, setCartItems] = useState([]);
 
 	useEffect(() => {
 		if (localStorage.getItem("user")) {
@@ -31,6 +33,13 @@ export const NavBar = () => {
 		localStorage.clear()
 		navigate("/login")
 	}
+	const addToCart = (product) => {
+		setCartItems((prevItems) => [...prevItems, product]);
+	};
+	const removeFromCart = (productId) => {
+		setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
+	};
+	const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
 	return (
 		<Navbar >
@@ -62,6 +71,9 @@ export const NavBar = () => {
 								<NavLink to="/administrador">Administrador</NavLink>
 							</Nav>
 						)}
+						{localStorage.getItem("role") === "client" && (<Nav>
+								<NavLink to="/Carrito"><CartIcon itemCount={cartItemCount}/></NavLink>
+							</Nav>)}
 						<Button onClick={handleClick} variant="light">
 							Cerrar Sesion
 						</Button>

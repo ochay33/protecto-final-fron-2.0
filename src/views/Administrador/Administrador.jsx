@@ -34,7 +34,7 @@ export const Administrador = () => {
 	}
 
 	const updateMenu = async menu => {
-		const { title, detail, id,precio,categoria } = menu
+		const { title, detail, id, precio, categoria, img } = menu
 
 		const resp = await axios.put(
 			`${import.meta.env.VITE_SERVER_URI}/api/update-menu`,
@@ -62,7 +62,7 @@ export const Administrador = () => {
 	}
 
 	const createMenu = async menu => {
-		const { title, detail, img,precio,categoria } = menu
+		const { title, detail, img, precio, categoria } = menu
 
 		const resp = await axios.post(
 			`${import.meta.env.VITE_SERVER_URI}/api/create-menu`,
@@ -114,7 +114,8 @@ export const Administrador = () => {
 						<tr style={{ color: "white"}}>
 							<th scope="col">Titulo</th>
 							<th scope="col">Detalle</th>
-							<th scope="col"></th>
+							<th scope="col">Categoria</th>
+							<th scope="col">Precio</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -122,6 +123,8 @@ export const Administrador = () => {
 							<tr key={menu.id}>
 								<th className="letra_tabla">{menu.title}</th>
 								<td className="letra_tabla">{menu.detail}</td>
+								<td className="letra_tabla">{menu.categoria}</td>
+								<td className="letra_tabla">{menu.precio}</td>
 								<td>
 									<button
 										className="btn btn-danger mr-2 mb-2"
