@@ -9,7 +9,7 @@ export const Menu = () => {
 	const { menuId } = useParams()
 
 	useEffect(() => {
-		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-Food/${menuId}`)
+		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-menu/${menuId}`)
 			.then(response => response.json())
 			.then(loquerecibo => setMenu(loquerecibo))
 			
@@ -31,7 +31,7 @@ export const Menu = () => {
 				<div className="col-6">
 					<div className="card ml-3 w-100">
 						<div className="card-header">
-							<h3>
+							<h3 className="titulo">
 							{menu.title}
 							</h3>
 						</div>
