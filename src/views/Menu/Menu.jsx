@@ -1,11 +1,12 @@
 import { useState, useEffect } from "react"
-import { useParams, Link } from "react-router-dom"
+import { useParams } from "react-router-dom"
+import Button from "react-bootstrap/Button"
 
 import "../../css/menu.css"
 
 export const Menu = () => {
 	const [menu, setMenu] = useState([])
-
+	
 	const { menuId } = useParams()
 
 	useEffect(() => {
@@ -36,15 +37,15 @@ export const Menu = () => {
 							</h3>
 						</div>
 						<div className="card-body">
-							<h4 className="card-title">Sanguche Premium</h4>
+							<h4 className="card-title">Detalle del menu</h4>
 							<hr />
 							<ul>
 								<p>{menu.detail}</p>
 							</ul>
 
-							<Link to="/comprar" className="btn btn-info btn-block">
-								Comprar Menu
-							</Link>
+							<Button >
+							Agregar al Carrito
+						    </Button>
 						</div>
 					</div>
 				</div>

@@ -35,20 +35,20 @@ export const Menues = () => {
 	}
 
 	return (
-		<Container className="mt-4">
-			<Nav>
+		<Container className="mt-4" >
+			<Nav style={{ justifyContent: "center" }}>
 				<input
 					value={term}
 					type="text"
 					onChange={e => setTerm(e.target.value)}
 				/>
-				<button onClick={handleSearch}>Buscar</button>
+				<button onClick={handleSearch} >Buscar</button>
 				{term && (
 					<span
 						onClick={handleReset}
 						style={{ color: "red", paddingLeft: 20, fontSize: 30 }}
 					>
-						X
+						x
 					</span>
 				)}
 			</Nav>

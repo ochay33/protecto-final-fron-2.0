@@ -7,6 +7,7 @@ import { Menu } from "../../views/Menu/Menu"
 import { IsLogged } from "../../components/IsLogged/IsLogged"
 import { IsAdmin } from "../../components/IsAdmin/IsAdmin"
 
+
 export const routes = [
 	{ path: "/", element: <Home /> },
 	{

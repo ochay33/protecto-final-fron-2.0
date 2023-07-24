@@ -1,28 +1,21 @@
 import { Link } from "react-router-dom"
 import Container from "react-bootstrap/Container"
-
-import mila1 from "../../img/mila1.jpg"
 import "../../css/home.css"
 
 export const Home = () => (
 	<Container className="mt-4">
-		<div className="home-container">
-			<div className="row">
-				<div className="col-6">
-					<h1 className="font-weight-bold">
-					</h1>
+		<div>
+			<div style={{display:"flex", textAlign:"center", justifyContent:"center"}}>
 					<Link to="/registro" className="btn btn-outline-info mt-3">
-						Crea tu cuenta
+						<h2>
+						    Crea tu cuenta AQUI
+						</h2>						      
 					</Link>
-				</div>
-				<div className="col-6">
-					{/* <img src={mila1} alt="portada1" /> */}
-				</div>
 			</div>
-			<div className="row">
-				<div className="col-8 offset-2 parrafito text-grey">
-				</div>
-			</div>
+			<br />
+			<div style={{display:"flex", textAlign:"center", justifyContent:"center"}}> 
+				<img src="https://images.adsttc.com/media/images/552d/b63a/e58e/cebf/5400/0272/large_jpg/Bar_Raval_30.jpg?1429059123"  width="900" height="500" style={{textAlign:"center"}} />
+			</div>	
 		</div>
 	</Container>
 )

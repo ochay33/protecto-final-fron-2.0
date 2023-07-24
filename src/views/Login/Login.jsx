@@ -5,6 +5,7 @@ import axios from "axios"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
+import { NavLink } from "react-bootstrap"
 
 const validationSchema = () =>
 	Yup.object().shape({
@@ -97,7 +98,7 @@ export const Login = () => {
 						<div className="errorMessage">{formik.errors.password}</div>
 					)}
 				</Form.Group>
-				<Button variant="primary" type="submit">
+				<Button variant="primary" type="submit" onClick={<NavLink to="/Menues"></NavLink>}>
 					Loguearse
 				</Button>
 			</Form>

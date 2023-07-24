@@ -3,11 +3,10 @@ import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
-import NavDropdown from "react-bootstrap/NavDropdown"
 import Navbar from "react-bootstrap/Navbar"
 import Button from "react-bootstrap/Button"
 import logo2 from "../../img/logo2.png"
-import CartIcon from '../Carrito/CartIcon'
+import CartIcon from '../Carrito/CarritoIcon/CartIcon'
 
 const getMenues = async () => {
 	const resp = await axios(
@@ -19,9 +18,9 @@ const getMenues = async () => {
 }
 
 export const NavBar = () => {
-	const [menues, setMenues] = useState()
+	const [setMenues] = useState()
 	const navigate = useNavigate()
-	const [cartItems, setCartItems] = useState([]);
+	const [cartItems] = useState([]);
 
 	useEffect(() => {
 		if (localStorage.getItem("user")) {
@@ -33,47 +32,52 @@ export const NavBar = () => {
 		localStorage.clear()
 		navigate("/login")
 	}
-	const addToCart = (product) => {
-		setCartItems((prevItems) => [...prevItems, product]);
-	};
-	const removeFromCart = (productId) => {
-		setCartItems((prevItems) => prevItems.filter((item) => item.id !== productId));
-	};
+	
+	
 	const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
 	return (
 		<Navbar >
 			<Container>
 				<Navbar.Brand><img src={ logo2 } width={100} /></Navbar.Brand>
-				<Nav className="me-auto">
-					<NavLink to="/">Inicio</NavLink>
+				<Nav className="me-auto">		
+					{localStorage.getItem("role") === "client"  && (
+						<NavLink to="/" style={{display: "none"}}>Inicio</NavLink>
+					)}
+					{localStorage.getItem("role") === "admin"  && (
+						<NavLink to="/" style={{display: "none"}}>Inicio</NavLink>
+					)}
+					{localStorage.getItem("role") === "client"  && (
+						<NavLink to="/menues"><h2>Menús</h2></NavLink>
+					)}	
+					{localStorage.getItem("role") === "admin"  && (
+						<NavLink to="/menues" ><h2>Menús</h2></NavLink>
+					)}
 					{!localStorage.getItem("user") && (
 						<>
-							<NavLink to="/login">Loguearse</NavLink>
-							<NavLink to="/registro">Registrarse</NavLink>
+						    <NavLink to="/"><h2>Inicio</h2></NavLink> 
+							<NavLink to="/login"><h2>Loguearse</h2></NavLink>
+							<NavLink to="/registro"><h2>Registrarse</h2></NavLink>
 						</>
 					)}
-					<NavLink to="/menues">Menús</NavLink>
-					{localStorage.getItem("user") && (
-						<NavDropdown title="" id="basic-nav-dropdown">
-							{menues?.map(menu => (
-								<NavLink key={menu.id} to={`/menu/${menu.id}`}>
-									{menu.title}
-								</NavLink>
-							))}
-						</NavDropdown>
-					)}
+					<NavLink to="/Contactanos"><h2>Contactanos</h2></NavLink>
+					<NavLink to="/Nosotros"><h2>Nosotros</h2></NavLink>
 				</Nav>
 				{localStorage.getItem("user") && (
 					<>
 						{localStorage.getItem("role") === "admin" && (
 							<Nav>
-								<NavLink to="/administrador">Administrador</NavLink>
+								<NavLink to="/administrador"><h4>Administrador</h4></NavLink>
+							</Nav>
+						)}
+						{localStorage.getItem("role") === "admin" && (
+							<Nav>
+								<NavLink to="/Pedidos"><h4>Pedidos</h4></NavLink>
 							</Nav>
 						)}
 						{localStorage.getItem("role") === "client" && (<Nav>
 								<NavLink to="/Carrito"><CartIcon itemCount={cartItemCount}/></NavLink>
-							</Nav>)}
+							</Nav>)}	
 						<Button onClick={handleClick} variant="light">
 							Cerrar Sesion
 						</Button>
