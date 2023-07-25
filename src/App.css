@@ -1,61 +1,61 @@
 nav a {
-	color: white;
-	padding: 0.4rem 0.6rem;
-	text-decoration: none;
+  color: white;
+  padding: 0.4rem 0.6rem;
+  text-decoration: none;
 }
 
 nav a.active {
-	color: palevioletred;
-	font-weight: bolder;
+  color: palevioletred;
+  font-weight: bolder;
 }
 
 .dropdown a {
-	color: black;
-	display: block;
+  color: black;
+  display: block;
 }
 
 .dropdown div {
-	width: 230px;
+  width: 230px;
 }
 
 #cards {
-	gap: 1rem;
+  gap: 1rem;
 }
 
 .img-wrapper {
-	height: 200px;
-	overflow: hidden;
+  height: 200px;
+  overflow: hidden;
 }
 
 #descriptione.card-text {
-	height: 120px;
+  height: 120px;
 }
 
 #admin form div {
-	margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 
 #admin form div input,
 #admin form div textarea {
-	width: 700px;
-	padding: 5px;
-	border-radius: 5px;
+  width: 700px;
+  padding: 5px;
+  border-radius: 5px;
 }
 
 #admin form div label {
-	margin-right: 1rem;
-	width: 120px;
+  margin-right: 1rem;
+  width: 120px;
 }
 
 input.error {
-	border: 1px solid red;
-	background-color: #ffaaaa;
+  border: 1px solid red;
+  background-color: #ffaaaa;
 }
 
 .errorMessage {
-	color: red;
-	padding-top: 5px;
+  color: red;
+  padding-top: 5px;
 }
-.letra_tabla{
-	color: white;
+.letra_tabla {
+  color: white;
 }
