@@ -1,12 +1,13 @@
-h3{
-    color:white
+h3 {
+  color: white;
 }
-.titulo{
-    color:black
+.titulo {
+  color: black;
 }
 body {
-    background-image: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(../img/fondologin.jpg);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-  }
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(../img/fondologin.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
