@@ -8,6 +8,7 @@ import Button from "react-bootstrap/Button"
 import logo2 from "../../img/logo2.png"
 import CartIcon from '../Carrito/CarritoIcon/CartIcon'
 
+
 const getMenues = async () => {
 	const resp = await axios(
 		`${import.meta.env.VITE_SERVER_URI}/api/read-foods`
@@ -60,7 +61,7 @@ export const NavBar = () => {
 							<NavLink to="/registro"><h2>Registrarse</h2></NavLink>
 						</>
 					)}
-					<NavLink to="/Contactanos"><h2>Contactanos</h2></NavLink>
+					<NavLink to="/Contacto"><h2>Contactanos</h2></NavLink>
 					<NavLink to="/Nosotros"><h2>Nosotros</h2></NavLink>
 				</Nav>
 				{localStorage.getItem("user") && (
