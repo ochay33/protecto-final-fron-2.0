@@ -6,6 +6,8 @@ import { Administrador } from "../../views/Administrador/Administrador"
 import { Menu } from "../../views/Menu/Menu"
 import { IsLogged } from "../../components/IsLogged/IsLogged"
 import { IsAdmin } from "../../components/IsAdmin/IsAdmin"
+import { Contacto } from "../../views/Contacto/Contacto"
+import { Nosotros } from "../../views/Nosotros/Nosotros"
 
 
 export const routes = [
@@ -21,6 +23,8 @@ export const routes = [
 	{ path: "/menues", element: <Menues /> },
 	{ path: "/registro", element: <Registro /> },
 	{ path: "/menu/:menuId", element: <Menu /> },
+	{ path: "/contacto", element: <Contacto /> },
+	{ path: "/nosotros", element: <Nosotros /> },
 	{
 		path: "administrador",
 		element: (

@@ -1,0 +1,72 @@
+@media (max-width: 576px) {
+    .contact-form {
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .form-label {
+      font-size: 14px;
+    }
+    
+    .form-control {
+      width: 100%;
+    }
+    
+    .mt-3 {
+      margin-top: 10px;
+    }
+  }
+  
+  /* Estilos para tablets y dispositivos más grandes */
+  @media (min-width: 577px) {
+    .contact-form {
+      width: 50%;
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 30px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .form-label {
+      font-size: 16px;
+      color:"white"
+    }
+    
+    .form-control {
+      width: 100%;
+    }
+    
+    .mt-3 {
+      margin-top: 15px;
+    }
+  }
+  
+  /* Estilos para pantallas grandes */
+  @media (min-width: 992px) {
+    .contact-form {
+      width: 40%;
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 40px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    
+    .form-label {
+      font-size: 18px;
+    }
+    
+    .form-control {
+      width: 100%;
+    }
+    
+    .mt-3 {
+      margin-top: 20px;
+    }
+  }
+  

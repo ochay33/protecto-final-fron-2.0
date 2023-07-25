@@ -1,7 +1,6 @@
 body {
   min-height: 100vh;
-  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url(../img/fondologin.jpg);
+  background-image: url(../img/fondohome10.jpg);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
