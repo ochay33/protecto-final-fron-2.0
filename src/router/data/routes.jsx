@@ -11,6 +11,7 @@ import { Nosotros } from "../../views/Nosotros/Nosotros"
 import { CartElements } from "../../components/Carrito/CartElements/CartElements"
 
 
+
 export const routes = [
 	{ path: "/", element: <Home /> },
 	{

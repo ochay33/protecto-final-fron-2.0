@@ -59,8 +59,7 @@ export const Menu = () => {
 							<hr />
 							<ul>
 								<p>{menu.detail}</p>
-							</ul>
-							
+							</ul>							
 							<Button onClick={() => addCart(menu)}>
 							Agregar al Carrito
 						    </Button>

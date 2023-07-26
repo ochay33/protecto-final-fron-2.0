@@ -77,9 +77,7 @@ export const NavBar = () => {
 							</Nav>
 						)}
 						{localStorage.getItem("role") === "client" && (<Nav>
-
 								<NavLink to="/carrito"><CartIcon itemCount={cartItemCount}/>{cart.length}</NavLink>
-
 							</Nav>)}	
 						<Button onClick={handleClick} variant="light">
 							Cerrar Sesion
