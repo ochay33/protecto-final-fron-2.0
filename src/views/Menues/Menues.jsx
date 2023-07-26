@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
-import { Footer } from "../../components/Footer";
 import Nav from "react-bootstrap/Nav";
 
 import { CardApp } from "../../components/CardApp";
