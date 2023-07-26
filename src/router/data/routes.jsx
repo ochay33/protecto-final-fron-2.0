@@ -26,6 +26,7 @@ export const routes = [
 	{ path: "/menu/:menuId", element: <Menu /> },
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
+	//{path: "/carrito", element: <Carrito /> },
 	{
 		path: "administrador",
 		element: (

@@ -50,7 +50,7 @@ export const Menues = () => {
           </span>
         )}
       </Nav>
-      <Container id="cards" className="p-2 mt-4 float-start">
+      <Container id="cards" className="p-2 mt-4 float-start" style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
         {menuesRender.map((menu) => (
           <CardApp key={menu.id} menu={menu} />
         ))}

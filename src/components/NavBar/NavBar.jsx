@@ -39,7 +39,7 @@ export const NavBar = () => {
 
 	return (
 		<Navbar >
-			<Container>
+			<Container style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
 				<Navbar.Brand><img src={ logo2 } width={100} /></Navbar.Brand>
 				<Nav className="me-auto">		
 					{localStorage.getItem("role") === "client"  && (
@@ -77,7 +77,9 @@ export const NavBar = () => {
 							</Nav>
 						)}
 						{localStorage.getItem("role") === "client" && (<Nav>
+
 								<NavLink to="/carrito"><CartIcon itemCount={cartItemCount}/>{cart.length}</NavLink>
+
 							</Nav>)}	
 						<Button onClick={handleClick} variant="light">
 							Cerrar Sesion
