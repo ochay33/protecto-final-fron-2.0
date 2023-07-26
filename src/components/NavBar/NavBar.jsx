@@ -23,6 +23,7 @@ export const NavBar = () => {
 	const navigate = useNavigate()
 	const [cartItems] = useState([]);
 	const {cart} = useContext(DataContext) 
+	
 	// useEffect(() => {
 	// 	if (localStorage.getItem("user")) {
 	// 		getMenues().then(menues => setMenues(menues))
