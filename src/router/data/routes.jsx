@@ -8,6 +8,7 @@ import { IsLogged } from "../../components/IsLogged/IsLogged"
 import { IsAdmin } from "../../components/IsAdmin/IsAdmin"
 import { Contacto } from "../../views/Contacto/Contacto"
 import { Nosotros } from "../../views/Nosotros/Nosotros"
+//import  Carrito  from "../../views/Carrito/Carrito"
 
 
 export const routes = [
@@ -25,6 +26,7 @@ export const routes = [
 	{ path: "/menu/:menuId", element: <Menu /> },
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
+	//{path: "/carrito", element: <Carrito /> },
 	{
 		path: "administrador",
 		element: (

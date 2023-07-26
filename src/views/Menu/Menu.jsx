@@ -43,7 +43,7 @@ export const Menu = () => {
 								<p>{menu.detail}</p>
 							</ul>
 
-							<Button >
+							<Button>
 							Agregar al Carrito
 						    </Button>
 						</div>
