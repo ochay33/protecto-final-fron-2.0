@@ -9,7 +9,7 @@ import { IsAdmin } from "../../components/IsAdmin/IsAdmin"
 import { Contacto } from "../../views/Contacto/Contacto"
 import { Nosotros } from "../../views/Nosotros/Nosotros"
 import { CartElements } from "../../components/Carrito/CartElements/CartElements"
-
+import { Orders } from "../../views/Orders/Orders"
 
 
 export const routes = [
@@ -28,7 +28,7 @@ export const routes = [
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
 	{ path : "/carrito" , element: <CartElements /> },
-
+  {path : "/orders", element: <Orders /> },
 
 	{
 		path: "administrador",

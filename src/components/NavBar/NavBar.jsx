@@ -73,7 +73,7 @@ export const NavBar = () => {
 						)}
 						{localStorage.getItem("role") === "admin" && (
 							<Nav>
-								<NavLink to="/Pedidos"><h4>Pedidos</h4></NavLink>
+								<NavLink to="/Orders"><h4>Pedidos</h4></NavLink>
 							</Nav>
 						)}
 						{localStorage.getItem("role") === "client" && (<Nav>
