@@ -4,7 +4,7 @@ import Card from "react-bootstrap/Card"
 
 export const CardApp = ({ menu }) => (
 	<Card key={menu.id} className="col-md-4 float-start" style={{ width: "18rem" }}>
-		<div className="img-wrapper">
+		<div>
 			<Card.Img variant="top" style={{height:150}} src={menu.img} />
 		</div> 
 		<Card.Body>

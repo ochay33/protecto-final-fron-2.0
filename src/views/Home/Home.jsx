@@ -14,7 +14,7 @@ export const Home = () => (
 			</div>
 			<br />
 			<div style={{display:"flex", textAlign:"center", justifyContent:"center"}}> 
-				<img src="https://images.adsttc.com/media/images/552d/b63a/e58e/cebf/5400/0272/large_jpg/Bar_Raval_30.jpg?1429059123"  width="100%" height="100%" style={{textAlign:"center"}} />
+				<img src="https://images.adsttc.com/media/images/552d/b63a/e58e/cebf/5400/0272/large_jpg/Bar_Raval_30.jpg?1429059123"  width="80%" height="80%" style={{textAlign:"center"}} />
 			</div>	
 		</div>
 	</Container>

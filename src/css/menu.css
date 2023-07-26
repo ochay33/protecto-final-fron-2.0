@@ -6,7 +6,7 @@ h3 {
 }
 body {
   background-image:url(../img/fondohome10.jpg);
-  background-repeat: no-repeat;
+  /* background-repeat: no-repeat; */
   background-size: cover;
   background-position: center;
 }

@@ -9,16 +9,16 @@ import backgroundImage  from '../../img/logo2.png';
 export const Nosotros = () => {
   return (
     <>
-      <div>
+      <div style={{display:"flex", justifyContent:"center"}}>
         <h1 style={{color:"white"}}>Dueños y creadores del bar</h1>
       </div>    
-      <div className='container' style={{color:"#333"}}>
+      <div className='container-nosotros' style={{color:"#333"}}>
         <div className='row'>
           <div className='col-md-6 col-lg-3 mb-4'>
             <Card style={{ width: '100%' }}>
               <Card.Img variant="top" src={yo} />
               <Card.Body>
-                <Card.Title>Gere</Card.Title>
+                <Card.Title>Geremias</Card.Title>
               </Card.Body>
             </Card>
           </div>
