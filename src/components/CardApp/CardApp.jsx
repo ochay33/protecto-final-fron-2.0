@@ -10,7 +10,7 @@ export const CardApp = ({ menu }) => (
 		<Card.Body>
 			<Card.Title>{menu.title}</Card.Title>
 			<hr />
-			<Card.Title>{menu.precio}</Card.Title>
+			<Card.Title>${menu.precio}</Card.Title>
 			<hr />
 			<Link to={`/menu/${menu.id}`}>
 				<Button variant="primary">Más información</Button>

@@ -8,6 +8,7 @@ const initialValues = {
 	email: "",
 	password: "",
 	username: "",
+	address: "",
 }
 
 export const Registro = () => {
@@ -63,6 +64,12 @@ export const Registro = () => {
 						label: "Usuario",
 						name: "username",
 						value: formValues.username,
+						type: "text",
+					},
+					{
+						label: "Direccion",
+						name: "address",
+						value: formValues.address,
 						type: "text",
 					},
 				].map(input => (

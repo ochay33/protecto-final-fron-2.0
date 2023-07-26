@@ -27,6 +27,9 @@ export const routes = [
 	{ path: "/menu/:menuId", element: <Menu /> },
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
+	{ path : "/carrito" , element: <CartElements /> },
+
+
 	{
 		path: "administrador",
 		element: (
@@ -35,7 +38,7 @@ export const routes = [
 			</IsAdmin>
 		),
 	},
-	{ path : "/carrito" , element: <CartElements /> },
+	
 	{
 		path: "*",
 		element: 404,

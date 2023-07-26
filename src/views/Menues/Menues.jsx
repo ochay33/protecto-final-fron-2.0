@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
+import cerrar from "../../img/cerrar2.png";
+import Button from "react-bootstrap/Button";
 
 import { CardApp } from "../../components/CardApp";
 
@@ -44,7 +46,7 @@ export const Menues = () => {
             onClick={handleReset}
             style={{ color: "red", paddingLeft: 20, fontSize: 30 }}
           >
-            x
+            <Button><img src={cerrar} width={30} /></Button>
           </span>
         )}
       </Nav>

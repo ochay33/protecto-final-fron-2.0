@@ -14,7 +14,6 @@ const getMenues = async () => {
 		`${import.meta.env.VITE_SERVER_URI}/api/read-foods`
 	)
 	const { data } = resp
-	// console.log(data)
 	return data
 }
 
@@ -23,12 +22,12 @@ export const NavBar = () => {
 	const navigate = useNavigate()
 	const [cartItems] = useState([]);
 	const {cart} = useContext(DataContext) 
-	
-	// useEffect(() => {
-	// 	if (localStorage.getItem("user")) {
-	// 		getMenues().then(menues => setMenues(menues))
-	// 	}
-	// }, [])
+
+	useEffect(() => {
+	 	if (localStorage.getItem("user")) {
+	 		getMenues().then(menues => setMenues(menues))
+	 	}
+	 }, [])
 
 	const handleClick = () => {
 		localStorage.clear()
