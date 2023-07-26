@@ -8,7 +8,8 @@ import { IsLogged } from "../../components/IsLogged/IsLogged"
 import { IsAdmin } from "../../components/IsAdmin/IsAdmin"
 import { Contacto } from "../../views/Contacto/Contacto"
 import { Nosotros } from "../../views/Nosotros/Nosotros"
-//import  Carrito  from "../../views/Carrito/Carrito"
+import { CartElements } from "../../components/Carrito/CartElements/CartElements"
+
 
 
 export const routes = [
@@ -35,6 +36,7 @@ export const routes = [
 			</IsAdmin>
 		),
 	},
+	{ path : "/carrito" , element: <CartElements /> },
 	{
 		path: "*",
 		element: 404,

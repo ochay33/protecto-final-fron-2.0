@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useContext } from "react"
 import { NavLink, useNavigate } from "react-router-dom"
 import axios from "axios"
 import Container from "react-bootstrap/Container"
@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar"
 import Button from "react-bootstrap/Button"
 import logo2 from "../../img/logo2.png"
 import CartIcon from '../Carrito/CarritoIcon/CartIcon'
-
+import { DataContext } from "../DataContext/DataContext"
 
 const getMenues = async () => {
 	const resp = await axios(
@@ -22,12 +22,12 @@ export const NavBar = () => {
 	const [setMenues] = useState()
 	const navigate = useNavigate()
 	const [cartItems] = useState([]);
-
-	useEffect(() => {
-		if (localStorage.getItem("user")) {
-			getMenues().then(menues => setMenues(menues))
-		}
-	}, [])
+	const {cart} = useContext(DataContext) 
+	// useEffect(() => {
+	// 	if (localStorage.getItem("user")) {
+	// 		getMenues().then(menues => setMenues(menues))
+	// 	}
+	// }, [])
 
 	const handleClick = () => {
 		localStorage.clear()
@@ -77,7 +77,7 @@ export const NavBar = () => {
 							</Nav>
 						)}
 						{localStorage.getItem("role") === "client" && (<Nav>
-								<NavLink to="/carrito"><CartIcon itemCount={cartItemCount}/></NavLink>
+								<NavLink to="/carrito"><CartIcon itemCount={cartItemCount}/>{cart.length}</NavLink>
 							</Nav>)}	
 						<Button onClick={handleClick} variant="light">
 							Cerrar Sesion
