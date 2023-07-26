@@ -28,7 +28,8 @@ export const routes = [
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
 	{ path : "/carrito" , element: <CartElements /> },
-	{path : "/orders", element: <Orders /> },
+  {path : "/orders", element: <Orders /> },
+
 	{
 		path: "administrador",
 		element: (
