@@ -28,6 +28,8 @@ export const routes = [
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
 	{ path : "/carrito" , element: <CartElements /> },
+
+
 	{
 		path: "administrador",
 		element: (

@@ -17,7 +17,6 @@ export const Menues = () => {
       .then((loquerecibo) => {
         setMenues(loquerecibo);
         setMenuesRender(loquerecibo);
-        console.log(loquerecibo);
       });
   }, []);
 
