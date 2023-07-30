@@ -59,29 +59,6 @@ export const Users = () => {
 		setShowForm(false)
 	}
 
-	// const createUser = async user => {
-	// 	const { email , username , password , address } = user
-
-	// 	const resp = await axios.post(
-	// 		`${import.meta.env.VITE_SERVER_URI}/api/create-user`,
-	// 		{
-	// 			email ,
-    //             username ,
-    //             password ,
-    //             address,
-	// 		},
-	// 		{
-	// 			headers: { ...headers, accept: "application/json"},
-	// 		}
-	// 	)
-	// 	const { status } = resp
-
-	// 	if (status === 201) {
-	// 		const othersusers = users.filter(prev => prev.id !== user.id)
-	// 		setUsers([...othersusers, user])
-	// 	}
-	// 	setShowForm(false)
-	// }
 
 	const handleDelete = (id, username) => {
 		let validator = window.confirm(
@@ -110,7 +87,6 @@ export const Users = () => {
 					<thead className="thead-dark">
 						<tr style={{ color: "white"}}>
 							<th scope="col">Username</th>
-							{/* <th scope="col">username</th> */}
 							<th scope="col">Role</th>
 							<th scope="col">Opciones</th>
 						</tr>
@@ -118,10 +94,8 @@ export const Users = () => {
 					<tbody>
 						{users.map(user => (
 							<tr key={user.id}>
-								{/* <th className="letra_tabla">{user.email}</th> */}
 								<td className="letra_tabla">{user.username}</td>
 								<td className="letra_tabla">{user.role}</td>
-								{/* <td className="letra_tabla">{user.address}</td> */}
 								<td>
 									<button
 										className="btn btn-danger mr-2 mb-2"
@@ -143,7 +117,6 @@ export const Users = () => {
 					</tbody>
 				</table>
 			)}
-			{/* <button onClick={handleCreate}>Crear nuevo</button> */}
 			{showForm && (
 				<form>
 					<div style={{ color: "white"}}>
@@ -169,28 +142,6 @@ export const Users = () => {
 							}
 						></textarea>
 					</div>
-					{/* <div style={{ color: "white"}}>
-						<label>Password</label>
-						<textarea
-							value={userEditable.password}
-							onChange={event =>
-								setuserEditable(prev => {
-									return { ...prev, password: event.target.value }
-								})
-							}
-						></textarea>
-					</div>
-					<div style={{ color: "white"}}>
-						<label>Address</label>
-						<textarea
-							value={userEditable.address}
-							onChange={event =>
-								setuserEditable(prev => {
-									return { ...prev, address: event.target.value }
-								})
-							}
-						></textarea>
-					</div> */}
 					{createOrEdit === "edit" && (
 						<button
 							type="button"
