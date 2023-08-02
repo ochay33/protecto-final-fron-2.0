@@ -3,19 +3,17 @@ import { DataContext } from "../../DataContext/DataContext";
 import Table from "react-bootstrap/Table"
 import React from "react";
 import axios from "axios";
-import Container from "react-bootstrap/Container"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 
 // let user;
 export const CartElements = () => {
-    const {cart} = useContext(DataContext);
-
-    const [formValues, setFormValues] = useState({
-		name: "",
-		email: "",
-        address:"",
-	})
+	const { cart, setCart } = useContext(DataContext);
+	const [formValues, setFormValues] = useState({
+	  name: "",
+	  email: "",
+	  address: "",
+	});
 
     const postUsuario = async () => {
         const order = {
@@ -43,17 +41,29 @@ export const CartElements = () => {
     )
 
     const handleSubmit = () => {
-		console.log(formValues)
-		postUsuario()
-	}
+		postUsuario();
+	  };
     
-    const handleChange = ev => {
-		setFormValues(prev => ({
-			...prev,
-			[ev.target.name]: ev.target.value,
-		}))
+	const handleChange = (ev) => {
+		setFormValues((prev) => ({
+		  ...prev,
+		  [ev.target.name]: ev.target.value,
+		}));
+	  };
+	const removeItemFromCart = (id) => {
+		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	}
 
+    const clearCart = () => {
+    setCart([]);
+    };
+	const updateQuantity = (id, newQuantity) => {
+		setCart((prevCart) =>
+		  prevCart.map((item) =>
+			item.id === id ? { ...item, cantidad: newQuantity } : item
+		  )
+		);
+	  };
 	
         return ( 
             <>
@@ -61,10 +71,10 @@ export const CartElements = () => {
             <thead>
                 <tr>
                     <th>Nombre</th>
-                    <th></th>
+                    <th>img</th>
                     <th>Precio</th>
+                    <th>Descripcion</th>
                     <th>Cantidad</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -80,6 +90,19 @@ export const CartElements = () => {
                         </td>
                         <td>{producto.precio}</td>
                         <td>{producto.detail}</td>
+						<td>
+						    <input
+                                type="number"
+                                value={producto.cantidad}
+                                onChange={(e) => updateQuantity(producto.id, parseInt(e.target.value))}
+                                min="1"
+                            />
+                        </td>
+                        <td>
+							<Button variant="danger" onClick={() => removeItemFromCart(producto.id)}>								
+                                 Eliminar
+                            </Button>
+                        </td>
                     </tr>
                 ))}
             </tbody>
@@ -94,48 +117,42 @@ export const CartElements = () => {
             </tfoot>
 
         </Table>
-        <Form>
-						<Form.Group
-							className="mb-3"
-							controlId="formBasicEmail"
-						>
-							<Form.Label>Nombre</Form.Label>
-							<Form.Control
-								onChange={handleChange}
-								value={formValues.name}
-								type="text"
-								name="name"
-							/>
-						</Form.Group>
-						<Form.Group
-							className="mb-3"
-							controlId="formBasicEmail"
-						>
-							<Form.Label>Email</Form.Label>
-							<Form.Control
-								onChange={handleChange}
-								value={formValues.email}
-								type="email"
-								name="email"
-							/>
-						</Form.Group>
-						<Form.Group className="mb-3">
-							<Form.Label>Tel</Form.Label>
-							<Form.Control
-								onChange={handleChange}
-								value={formValues.address}
-								type="text"
-								name="phone"
-							/>
-						</Form.Group>
-						<Button
-							variant="primary"
-							type="button"
-							onClick={handleSubmit}
-						>
-							Submit
-						</Button>
-					</Form>
+		<Button variant="danger" onClick={clearCart}>
+            Limpiar Carrito
+        </Button>
+		<br />
+		<Form style={{backgroundColor:"gray", color:"white", display:"flex", flexDirection:"column", padding:"20px", border:"1px solid #ccc"}}>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Nombre</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            value={formValues.name}
+            type="text"
+            name="name"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            value={formValues.email}
+            type="email"
+            name="email"
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Direccion</Form.Label>
+          <Form.Control
+            onChange={handleChange}
+            value={formValues.address}
+            type="address"
+            name="address"
+          />
+        </Form.Group>
+        <Button variant="primary" type="button" onClick={handleSubmit}>
+          Comprar
+        </Button>
+        </Form>
         </>
     )
 };
