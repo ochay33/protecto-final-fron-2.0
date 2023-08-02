@@ -59,6 +59,7 @@ export const Users = () => {
 		setShowForm(false)
 	}
 
+
 	const handleDelete = (id, username) => {
 		let validator = window.confirm(
 			`Está seguro que quiere eliminar el user ${username}?`
@@ -72,6 +73,15 @@ export const Users = () => {
 		setCreateOrEdit("edit")
 	}
 
+
+
+	const handleCreate = () => {
+		setShowForm(true)
+		setuserEditable({})
+		setCreateOrEdit("create")
+	}
+
+
 	return (
 		<Container className="mt-4" id="admin">
 			<h1 style={{ color: "white"}}>Admin</h1>
@@ -81,15 +91,18 @@ export const Users = () => {
 						<tr style={{ color: "white"}}>
 							<th scope="col">Username</th>
 							<th scope="col">Role</th>
+
                             <th scope="col">Mail</th>
 							<th scope="col">Opciones</th>
 						</tr>
 					</thead>
 					<tbody style={{backgroundColor:"white"}}>
+
 						{users.map(user => (
 							<tr key={user.id}>
 								<td className="letra_tabla">{user.username}</td>
 								<td className="letra_tabla">{user.role}</td>
+
                                 <td className="letra_tabla">{user.email}</td>
 								<td>
 									<button
@@ -137,6 +150,7 @@ export const Users = () => {
 							}
 						></textarea>
 					</div>
+
                     <div style={{ color: "white"}}>
 						<label>Email</label>
 						<textarea
@@ -148,14 +162,16 @@ export const Users = () => {
 							}
 						></textarea>
 					</div>
-					{createOrEdit === "edit" && (
+
+					{createOrEdit === "create" && (
 						<button
 							type="button"
-							onClick={() => updateUser(userEditable)}
+							onClick={() => createUser(userEditable)}
 						>
-							Editar
+							Crear
 						</button>
 					)}
+
 				</form>
 			)}
 		</Container>
