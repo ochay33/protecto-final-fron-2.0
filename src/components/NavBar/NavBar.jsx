@@ -11,12 +11,11 @@ import { DataContext } from "../DataContext/DataContext"
 
 const getMenues = async () => {
 	const resp = await axios(
-		`${import.meta.env.VITE_SERVER_URI}/api/read-foods`
+		`${import.meta.env.VITE_SERVER_URI}/api/read-menues`
 	)
 	const { data } = resp
 	return data
 }
-
 export const NavBar = () => {
 	const [setMenues] = useState()
 	const navigate = useNavigate()
@@ -30,11 +29,14 @@ export const NavBar = () => {
 	 }, [])
 
 	const handleClick = () => {
+		let validator = window.confirm(
+			`Esta seguro que desea cerrar sesion?`
+		)
+		if (validator){
 		localStorage.clear()
 		navigate("/login")
+	    }
 	}
-	
-	
 	const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
 	return (
@@ -73,7 +75,9 @@ export const NavBar = () => {
 						)}
 						{localStorage.getItem("role") === "admin" && (
 							<Nav>
-								<NavLink to="/orders"><h4>Pedidos</h4></NavLink>
+
+								<NavLink to="/Orders"><h4>Pedidos</h4></NavLink>
+
 							</Nav>
 						)}
 						{localStorage.getItem("role") === "admin" && (

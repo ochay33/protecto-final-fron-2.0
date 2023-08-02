@@ -73,11 +73,14 @@ export const Users = () => {
 		setCreateOrEdit("edit")
 	}
 
+
+
 	const handleCreate = () => {
 		setShowForm(true)
 		setuserEditable({})
 		setCreateOrEdit("create")
 	}
+
 
 	return (
 		<Container className="mt-4" id="admin">
@@ -88,14 +91,19 @@ export const Users = () => {
 						<tr style={{ color: "white"}}>
 							<th scope="col">Username</th>
 							<th scope="col">Role</th>
+
+                            <th scope="col">Mail</th>
 							<th scope="col">Opciones</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style={{backgroundColor:"white"}}>
+
 						{users.map(user => (
 							<tr key={user.id}>
 								<td className="letra_tabla">{user.username}</td>
 								<td className="letra_tabla">{user.role}</td>
+
+                                <td className="letra_tabla">{user.email}</td>
 								<td>
 									<button
 										className="btn btn-danger mr-2 mb-2"
@@ -142,14 +150,19 @@ export const Users = () => {
 							}
 						></textarea>
 					</div>
-					{createOrEdit === "edit" && (
-						<button
-							type="button"
-							onClick={() => updateUser(userEditable)}
-						>
-							Editar
-						</button>
-					)}
+
+                    <div style={{ color: "white"}}>
+						<label>Email</label>
+						<textarea
+							value={userEditable.email}
+							onChange={event =>
+								setuserEditable(prev => {
+									return { ...prev, email: event.target.value }
+								})
+							}
+						></textarea>
+					</div>
+
 					{createOrEdit === "create" && (
 						<button
 							type="button"
@@ -158,6 +171,7 @@ export const Users = () => {
 							Crear
 						</button>
 					)}
+
 				</form>
 			)}
 		</Container>

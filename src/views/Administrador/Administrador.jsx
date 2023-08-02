@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Container from "react-bootstrap/Container"
 
+import "../../css/administrador.css"
 
 export const Administrador = () => {
 	const [menues, setMenues] = useState([])
@@ -112,13 +113,14 @@ export const Administrador = () => {
 				<table className="table">
 					<thead className="thead-dark">
 						<tr style={{ color: "white"}}>
-							<th scope="col">Titulo</th>
-							<th scope="col">Detalle</th>
-							<th scope="col">Categoria</th>
-							<th scope="col">Precio</th>
+							<th style={{border: "1px solid #ccc"}} scope="col">Titulo</th>
+							<th style={{border: "1px solid #ccc"}} scope="col">Detalle</th>
+							<th style={{border: "1px solid #ccc"}} scope="col">Categoria</th>
+							<th style={{border: "1px solid #ccc"}} scope="col">Precio</th>
+							<th style={{border: "1px solid #ccc"}} scope="col">Botones</th>
 						</tr>
 					</thead>
-					<tbody>
+					<tbody style={{backgroundColor:"white", color:"black"}}>
 						{menues.map(menu => (
 							<tr key={menu.id}>
 								<th className="letra_tabla">{menu.title}</th>
