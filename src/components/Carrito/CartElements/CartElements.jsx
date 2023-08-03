@@ -6,9 +6,10 @@ import axios from "axios";
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 
-// let user;
 export const CartElements = () => {
 	const { cart, setCart } = useContext(DataContext);
+
+
 	const [formValues, setFormValues] = useState({
 	  name: "",
 	  email: "",
@@ -17,10 +18,13 @@ export const CartElements = () => {
 
     const postUsuario = async () => {
         const order = {
-			buyer: formValues,
-			items: cart,
-			total: total(),
+          datos: formValues,
+          items: cart,
+          total: total(),
 		}
+
+    console.log(cart)
+
 		const resp = await axios.post(
 			`${import.meta.env.VITE_SERVER_URI}/api/create-Orders`,
 			order
@@ -30,18 +34,20 @@ export const CartElements = () => {
 
 		if (status === 201) {
 			alert("Registrado Exitosamente!")
-			navigate("/menues")
+			// navigate("/menues")
 		}
 	}
     const total = () =>
     cart.reduce(
         (acumulador, valorActual) =>
-        acumulador +  valorActual.precio,
+        acumulador +  valorActual.cantidad * valorActual.precio,
         0,
     )
 
     const handleSubmit = () => {
-		postUsuario();
+      console.log(cart)
+	  	postUsuario();
+    
 	  };
     
 	const handleChange = (ev) => {
@@ -50,6 +56,8 @@ export const CartElements = () => {
 		  [ev.target.name]: ev.target.value,
 		}));
 	  };
+
+
 	const removeItemFromCart = (id) => {
 		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	}
@@ -57,6 +65,8 @@ export const CartElements = () => {
     const clearCart = () => {
     setCart([]);
     };
+
+
 	const updateQuantity = (id, newQuantity) => {
 		setCart((prevCart) =>
 		  prevCart.map((item) =>

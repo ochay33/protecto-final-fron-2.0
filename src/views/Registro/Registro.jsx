@@ -110,7 +110,7 @@ export const Registro = () => {
 	 				)}
 	 			</Form.Group>
 	 			<Form.Group className="mb-3" controlId="formBasicPassword">
-	 				<Form.Label >Usiario</Form.Label>
+	 				<Form.Label >Usuario</Form.Label>
 	 				<Form.Control
 	 					name="username"
 	 					className={

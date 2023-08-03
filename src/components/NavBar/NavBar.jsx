@@ -22,11 +22,11 @@ export const NavBar = () => {
 	const [cartItems] = useState([]);
 	const {cart} = useContext(DataContext) 
 
-	useEffect(() => {
-	 	if (localStorage.getItem("user")) {
-	 		getMenues().then(menues => setMenues(menues))
-	 	}
-	 }, [])
+	// useEffect(() => {
+	//  	if (localStorage.getItem("user")) {
+	//  		getMenues().then(menues => setMenues(menues))
+	//  	}
+	//  }, [])
 
 	const handleClick = () => {
 		let validator = window.confirm(
@@ -76,7 +76,7 @@ export const NavBar = () => {
 						{localStorage.getItem("role") === "admin" && (
 							<Nav>
 
-								<NavLink to="/Orders"><h4>Pedidos</h4></NavLink>
+								<NavLink to="/orders"><h4>Pedidos</h4></NavLink>
 
 							</Nav>
 						)}
