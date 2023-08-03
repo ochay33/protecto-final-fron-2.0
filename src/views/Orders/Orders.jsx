@@ -10,6 +10,12 @@ export const Orders = () => {
 			.then(response => response.json())
 			.then(loquerecibo => setOrders(loquerecibo))
 	}, [])	
+
+	// const items = (orders) => {
+	// 	{orders.map(item =><div>${item}</div>)}
+	// 	return items_recorridos;
+	// }
+	
 	return (
 		<Container className="mt-4" id="admin">
 			<h1 style={{ color: "white"}}>Pedidos</h1>
@@ -23,9 +29,14 @@ export const Orders = () => {
 					</thead>
 					<tbody>
 						{orders.map(orders => (
-							<tr key={orders.id}>
-								<th className="letra_tabla">{orders.datos}</th>
-								<td className="letra_tabla">{orders.items}</td>
+							<tr key={orders._id}>
+								<th className="letra_tabla">{orders.datos.name}</th>
+								{/* <td className="letra_tabla">{orders.items[0].detail}</td> */}
+								{/* <td className="letra_tabla">{items(orders)}</td> */}
+								{/* {console.log(orders)} */}
+								<td className="letra_tabla">{orders.items.map(item =>(
+									<div key={item.id}><ul><li>{item.title}</li></ul></div>
+								))}</td>
 								<td className="letra_tabla">{orders.total}</td>	
 							</tr>
 						))}
