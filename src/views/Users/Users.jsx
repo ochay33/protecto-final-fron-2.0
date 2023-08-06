@@ -75,13 +75,6 @@ export const Users = () => {
 
 
 
-	const handleCreate = () => {
-		setShowForm(true)
-		setuserEditable({})
-		setCreateOrEdit("create")
-	}
-
-
 	return (
 		<Container className="mt-4" id="admin">
 			<h1 style={{ color: "white"}}>Admin</h1>
@@ -163,10 +156,10 @@ export const Users = () => {
 						></textarea>
 					</div>
 
-					{createOrEdit === "create" && (
+					{createOrEdit === "edit" && (
 						<button
 							type="button"
-							onClick={() => createUser(userEditable)}
+							onClick={() => updateUser(userEditable)}
 						>
 							Crear
 						</button>
