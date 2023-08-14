@@ -11,11 +11,10 @@ export const DataProvider = ({ children }) => {
     if (existingItem) {
       // Si el producto ya está en el carrito, actualiza la cantidad
       const updatedCart = cart.map((item) =>
-        item.id === producto.id ? { ...item, cantidad: item.cantidad + quantity } : item
+        item.id === producto.id ? { ...item } : item
       );
       setCart(updatedCart);
     } else {
-      // Si el producto no está en el carrito, agrega el nuevo producto con la cantidad especificada
       setCart((prev) => [...prev, { ...producto, cantidad: quantity }]);
     }
   };

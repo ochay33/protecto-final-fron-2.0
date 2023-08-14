@@ -19,8 +19,8 @@ export const Menu = () => {
 	}, [menuId]);
   
 	const handleAddToCart = () => {
-	  // Llama a la función addCart con el menú y la cantidad seleccionada
-	  addCart({ ...menu, cantidad: quantity }); // Usar la propiedad 'cantidad' en lugar de 'quantity'
+	  
+	  addCart({ ...menu });
 	};
   return (
     <div className="container mt-5 curso">
@@ -47,19 +47,6 @@ export const Menu = () => {
                 <p>{menu.detail}</p>
                 <p>${menu.precio}</p>
               </ul>
-              <div className="mb-3">
-                <label htmlFor="quantityInput" className="form-label">
-                  Cantidad:
-                </label>
-                <input
-                  type="number"
-                  id="quantityInput"
-                  className="form-control"
-                  value={quantity}
-                  min="1"
-                  onChange={(e) => setQuantity(parseInt(e.target.value))}
-                />
-              </div>
               <Button onClick={handleAddToCart}>Agregar al Carrito</Button>
             </div>
           </div>
