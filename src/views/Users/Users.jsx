@@ -161,7 +161,7 @@ export const Users = () => {
 							type="button"
 							onClick={() => updateUser(userEditable)}
 						>
-							Crear
+							Editar
 						</button>
 					)}
 

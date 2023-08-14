@@ -1,41 +1,53 @@
-import { useContext ,useState} from "react";
+import { useContext } from "react";
 import { DataContext } from "../../DataContext/DataContext";
 import Table from "react-bootstrap/Table"
 import React from "react";
 import axios from "axios";
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
+import { useFormik } from "formik"
+import * as Yup from "yup"
 
 export const CartElements = () => {
 	const { cart, setCart } = useContext(DataContext);
 
+  const validationSchema = () =>
+	    Yup.object().shape({
+		    name: Yup.string()
+			    .required("* Campo obligatorio")
+			    .min(3, "El Nombre debe tener al menos 3 caracteres"),
+		    phone: Yup.string()
+		      .required("* Campo obligatorio")
+		      .min(7, "El Telefono debe tener al menos 7 caracteres"),
+        address: Yup.string()
+          .required("* Campo obligatorio")
+          .min(6, "La Direccion debe tener al menos 6 caracteres"),
+    })      
 
-	const [formValues, setFormValues] = useState({
+
+	const initialValues = {
 	  name: "",
-	  email: "",
+	  phone: "",
 	  address: "",
-	});
+	};
 
-    const postUsuario = async () => {
+  const postUsuario = async () => {
         const order = {
-          datos: formValues,
+          datos: formik.values,
           items: cart,
           total: total(),
-		}
+	}
 
-    console.log(cart)
-
-		const resp = await axios.post(
+	const resp = await axios.post(
 			`${import.meta.env.VITE_SERVER_URI}/api/create-Orders`,
-			order
-		)
+			order,
+	)
 
-		const { status } = resp
+	const { status } = resp
 
-		if (status === 201) {
-			alert("Registrado Exitosamente!")
-			// navigate("/menues")
-		}
+	if (status === 201) {
+			alert("Pedido Realizado Exitosamente!")
+	  }
 	}
     const total = () =>
     cart.reduce(
@@ -44,19 +56,45 @@ export const CartElements = () => {
         0,
     )
 
-    const handleSubmit = () => {
-      console.log(cart)
-	  	postUsuario();
-    
-	  };
-    
-	const handleChange = (ev) => {
-		setFormValues((prev) => ({
-		  ...prev,
-		  [ev.target.name]: ev.target.value,
-		}));
-	  };
+    const onSubmit = () => {
+      if (cart.length === 0) {
+        alert("El carrito está vacío. Agrega productos antes de comprar.");
+      } else {
+        if (!formik.isValid) {
+          alert(
+            "Por favor, completa todos los campos obligatorios de manera correcta."
+          );
+        } else {
+          postUsuario();
+          clearCart();
+          formik.resetForm();
+        }
+      }
+    };
+    const formik = useFormik({
+      initialValues,
+      enableReinitialize: true,
+      validationSchema,
+      onSubmit,
+    })
 
+    const handleSubmit = () => {
+      if (cart.length === 0) {
+        alert("El carrito está vacío. Agrega productos antes de comprar.");
+      } else {
+        if (formik.values === Empty) {
+          alert(
+            "Por favor, completa todos los campos obligatorios de manera correcta."
+          );
+        } else {
+          postUsuario();
+          clearCart();
+          formik.resetForm();
+        }
+      }
+    };
+    
+    
 
 	const removeItemFromCart = (id) => {
 		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
@@ -77,8 +115,8 @@ export const CartElements = () => {
 	
         return ( 
             <>
-            <Table striped bordered hover variant="dark">
-            <thead>
+            <Table style={{backgroundColor:"gray", color:"white"}} striped bordered hover variant="dark">
+            <thead >
                 <tr>
                     <th>Nombre</th>
                     <th>img</th>
@@ -131,35 +169,74 @@ export const CartElements = () => {
             Limpiar Carrito
         </Button>
 		<br />
-		<Form style={{backgroundColor:"gray", color:"white", display:"flex", flexDirection:"column", padding:"20px", border:"1px solid #ccc"}}>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
+    <br />
+		<Form onSubmit={formik.handleSubmit} style={{backgroundColor:"gray", color:"white", display:"flex", flexDirection:"column", padding:"20px", border:"1px solid #ccc"}}>
+        <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
-            onChange={handleChange}
-            value={formValues.name}
+            onChange={formik.handleChange}
             type="text"
             name="name"
+            className={
+              formik.errors.name &&
+              formik.touched.name &&
+              "error"
+          }
+            maxLength={20}
+						minLength={3}
+	 					value={formik.values.name}
+	 					onBlur={formik.handleBlur}
           />
+          {formik.touched.name && formik.errors.name && (
+            <div className="errorMessage">{formik.errors.name}</div>
+          )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Label>Email</Form.Label>
+        <Form.Group className="mb-3" controlId="formBasicPhone">
+          <Form.Label>Telefono</Form.Label>
           <Form.Control
-            onChange={handleChange}
-            value={formValues.email}
-            type="email"
-            name="email"
+            onChange={formik.handleChange}
+            type="number"
+            name="phone"
+            className={
+              formik.errors.phone &&
+              formik.touched.phone &&
+              "error"
+          }
+            maxLength={40}
+						minLength={7}
+	 					value={formik.values.phone}
+	 					onBlur={formik.handleBlur}
           />
+          {formik.touched.phone && formik.errors.phone && (
+            <div className="errorMessage">{formik.errors.phone}</div>
+          )}  
         </Form.Group>
-        <Form.Group className="mb-3">
+        <Form.Group className="mb-3" controlId="formBasicAddress">
           <Form.Label>Direccion</Form.Label>
           <Form.Control
-            onChange={handleChange}
-            value={formValues.address}
+            onChange={formik.handleChange}
             type="address"
             name="address"
+            className={
+              formik.errors.address &&
+              formik.touched.address &&
+              "error"
+          }
+            maxLength={40}
+						minLength={7}
+	 					value={formik.values.address}
+	 					onBlur={formik.handleBlur}
           />
+          {formik.touched.address && formik.errors.address && (
+            <div className="errorMessage">{formik.errors.address}</div>
+          )}  
         </Form.Group>
-        <Button variant="primary" type="button" onClick={handleSubmit}>
+        <Button 
+          variant="primary" 
+          className="btn btn-info btn-block mt-4"
+          type="submit" 
+          onClick={handleSubmit}
+          disabled={!formik.isValid || cart.length === 0}>
           Comprar
         </Button>
         </Form>
