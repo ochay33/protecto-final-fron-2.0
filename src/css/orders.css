@@ -1,0 +1,50 @@
+body{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+.table{
+    background-color: red;
+    text-align: center;
+}
+tr {
+    color: white;
+}
+.tr {
+    color : white;
+}
+.th {
+    border: 1px solid #ccc;   
+}
+.boton1{
+    display: flex;
+    margin-right: 2%;
+    margin-bottom: 3%;
+    margin-top: 0;
+}
+.boton2{
+    display: flex;
+    margin-top: 0;
+    margin-left: 2%;
+    margin-bottom: 3%;
+}
+.tbody {
+    background-color: grey;
+}
+.h1 {
+    color: white;
+}
+.td {
+    border: 1px solid #ccc;   
+}
+.td1{
+    display: flex;
+    justify-content: space-around;
+}
+.botones{
+    display: flex;
+    justify-content: center;
+}
+.detallesOrdenes{
+    color: black;
+}

@@ -11,6 +11,8 @@
 		"server": "json-server --watch db.json --port 3005"
 	},
 	"dependencies": {
+		"@mercadopago/sdk-js": "^0.0.3",
+		"@mercadopago/sdk-react": "^0.0.13",
 		"axios": "^1.4.0",
 		"bootstrap": "^5.2.3",
 		"formik": "^2.4.2",

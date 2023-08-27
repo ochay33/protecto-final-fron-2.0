@@ -1,27 +1,42 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext, useEffect } from "react";
 
 export const DataContext = createContext([]);
 
 export const DataProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  const addCart = (producto, quantity) => {
-    const existingItem = cart.find((item) => item.id === producto.id);
+  const [inputValue1, setInputValue1] = useState(localStorage.getItem('inputValue1') || '');
+  const [inputValue2, setInputValue2] = useState(localStorage.getItem('inputValue2') || '');
 
-    if (existingItem) {
-      // Si el producto ya está en el carrito, actualiza la cantidad
-      const updatedCart = cart.map((item) =>
-        item.id === producto.id ? { ...item } : item
-      );
-      setCart(updatedCart);
-    } else {
-      setCart((prev) => [...prev, { ...producto, cantidad: quantity }]);
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
     }
+  }, []);
+
+
+  const addCart = (producto) => {
+    
+    setCart((prev) => [...prev, { ...producto }]);
+    localStorage.setItem('cart', JSON.stringify([...cart, { ...producto }]));
+    localStorage.setItem('inputValue1', inputValue1);
+    localStorage.setItem('inputValue2', inputValue2);
   };
+  const clearCart = () => {
+    setCart([]);
+    localStorage.removeItem('cart');
+    localStorage.removeItem('inputValue1', inputValue1);
+    localStorage.removeItem('inputValue2', inputValue2);
+  };
+  
 
   return (
-    <DataContext.Provider value={{ cart, setCart, addCart }}>
+    <DataContext.Provider value={{ cart, setCart, addCart, inputValue1, setInputValue1, inputValue2, setInputValue2, clearCart }}>
       {children}
     </DataContext.Provider>
   );
 };
+export function useData() {
+  return useContext(DataContext);
+}

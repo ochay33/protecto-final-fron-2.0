@@ -12,6 +12,7 @@ import { CartElements } from "../../components/Carrito/CartElements/CartElements
 import { Orders } from "../../views/Orders/Orders"
 import { Users } from "../../views/Users"
 
+
 export const routes = [
 	{ path: "/", element: <Home /> },
 	{
@@ -28,7 +29,8 @@ export const routes = [
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
 	{ path : "/carrito" , element: <CartElements /> },
-  {path : "/orders", element: <Orders /> },
+    { path : "/orders", element: <Orders /> },
+	
 
 	{
 		path:"/users" ,

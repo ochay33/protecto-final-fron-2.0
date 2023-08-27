@@ -5,6 +5,7 @@ import nadir from '../../img/nadir.png';
 import colo from '../../img/pablo.jpg';
 import lucas from '../../img/lucas.png';
 import backgroundImage  from '../../img/logo2.png';
+import "../../css/nosotros.css";
 
 export const Nosotros = () => {
   return (

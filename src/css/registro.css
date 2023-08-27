@@ -7,7 +7,13 @@
 .card-registro img{
     object-fit: cover;
 }
-
+Form{
+    display: flex;
+    width: 100%;
+    margin: auto;
+    color: white ;
+    flex-direction: column;
+  }
 .card-body{
     padding: 30px;
 }

@@ -6,7 +6,53 @@
     border: 1px solid #ccc;
     border: 1px solid #ccc;
 }
+#label{
+    display: flex;
+    align-items: center;
+    color: black;
+}
+#botones{
+    width: 86px;
+}
+#h3{
+    display: flex;
+    color: black;
+    align-items: center;
+}
 .table {
     border: 1px solid #ccc;
     color: black;
 }
+#table{
+    width: 100%;
+}
+h1{
+    color: white;
+}
+#admin{
+    display: flex;
+    flex-wrap: wrap;
+    width: 200vh;
+}
+#botoncrear{
+    width: 100px;
+    margin-left: 50%;
+}
+form{
+    display: flex;
+}
+#th{
+    border: 1px solid #ccc;
+}
+#tbody{
+    background-color: white;
+    color: black;
+}
+
+@media (max-width: 550px){
+    #admin{
+        display: flex;
+        flex-wrap: wrap;
+        width: 50vh;
+    }
+}    

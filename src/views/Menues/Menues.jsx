@@ -3,8 +3,9 @@ import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import cerrar from "../../img/cerrar2.png";
 import Button from "react-bootstrap/Button";
-
 import { CardApp } from "../../components/CardApp";
+
+import "../../css/menues.css";
 
 export const Menues = () => {
   const [menues, setMenues] = useState([]);
@@ -33,8 +34,8 @@ export const Menues = () => {
   };
 
   return (
-    <Container className="mt-4">
-      <Nav style={{ justifyContent: "center" }}>
+    <Container id="container">
+       <Nav id="nav">
         <input
           value={term}
           type="text"
@@ -50,7 +51,8 @@ export const Menues = () => {
           </span>
         )}
       </Nav>
-      <Container id="cards" className="p-2 mt-4 float-start" style={{display:"flex", flexWrap:"wrap", justifyContent:"center"}}>
+      <br />
+      <Container id="cards">
         {menuesRender.map((menu) => (
           <CardApp key={menu.id} menu={menu} />
         ))}

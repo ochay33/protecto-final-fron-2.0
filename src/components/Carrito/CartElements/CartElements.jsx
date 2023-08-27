@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import { useState, useEffect } from "react";
 import { DataContext } from "../../DataContext/DataContext";
 import Table from "react-bootstrap/Table"
 import React from "react";
@@ -7,55 +8,119 @@ import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import { useFormik } from "formik"
 import * as Yup from "yup"
+import { useData } from "../../DataContext/DataContext";
+import Modal from "react-bootstrap/Modal";
+import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+
 
 export const CartElements = () => {
 	const { cart, setCart } = useContext(DataContext);
+  const { inputValue1, inputValue2, setInputValue1, setInputValue2 } = useData();
+  const [showModal, setShowModal] = useState(false);
+  const [orderInfo, setOrderInfo] = useState({
+    orderId: "",
+    orderStatus: ""
+  });
 
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart');
+    if (savedCart) {
+      setCart(JSON.parse(savedCart));
+    }
+    const savedFormData = localStorage.getItem('formData');
+    if (savedFormData) {
+      formik.setValues(JSON.parse(savedFormData));
+    }
+    const savedInputValue1 = localStorage.getItem('inputValue1') || '';
+    setInputValue1(savedInputValue1);
+    const savedInputValue2 = localStorage.getItem('inputValue2') || '';
+    setInputValue2(savedInputValue2);
+  }, []);
+
+  const [preferenceId, setPreferenceId] = useState(null);
+  initMercadoPago('TEST-cbb3ea8b-f9de-48bb-8527-f9010b3b5736');
+
+  const CreatePreference = async ( title, price ) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URI}/create_preference`,{
+          titulo: title,
+          price: price,
+          quantity: inputValue2,
+          currency_id: 'ARS',
+        });
+        const { id } = response.data;
+        return id;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+  const handleMercPago = async () => {
+    const preferencePromises = cart.map(async (producto) => {
+      return await CreatePreference(producto.title, producto.precio);
+    });
+ 
+    const preferenceIds = await Promise.all(preferencePromises);
+    if (preferenceIds.length > 0) {
+      setPreferenceId(preferenceIds[0]);
+    }
+  };
+  
   const validationSchema = () =>
 	    Yup.object().shape({
 		    name: Yup.string()
 			    .required("* Campo obligatorio")
-			    .min(3, "El Nombre debe tener al menos 3 caracteres"),
+			    .min(3, "El Nombre debe tener al menos 3 caracteres")
+          .max(30, "El Nombre debe tener un maximo de  30 caracteres"),
 		    phone: Yup.string()
 		      .required("* Campo obligatorio")
-		      .min(7, "El Telefono debe tener al menos 7 caracteres"),
+		      .min(7, "El Telefono debe tener al menos 7 caracteres")
+          .max(25, "El Telefono debe tener un maximo de 25 caracteres"),
         address: Yup.string()
           .required("* Campo obligatorio")
-          .min(6, "La Direccion debe tener al menos 6 caracteres"),
-    })      
-
-
-	const initialValues = {
-	  name: "",
-	  phone: "",
-	  address: "",
-	};
+          .min(6, "La Direccion debe tener al menos 6 caracteres")
+          .max(40, "La Direccion debe tener un maximo de 40 caracteres"),
+        checkbox: Yup.string()
+          .required("* Campo obligatorio")
+             
+    })
 
   const postUsuario = async () => {
         const order = {
           datos: formik.values,
           items: cart,
+          detalles: inputValue1,
+          cantidad: inputValue2,
           total: total(),
 	}
 
-	const resp = await axios.post(
-			`${import.meta.env.VITE_SERVER_URI}/api/create-Orders`,
-			order,
-	)
+	try {
+    const resp = await axios.post(
+      `${import.meta.env.VITE_SERVER_URI}/api/create-Orders`,
+      order
+    );
 
-	const { status } = resp
+    const { status, data } = resp;
 
-	if (status === 201) {
-			alert("Pedido Realizado Exitosamente!")
-	  }
-	}
+    if (status === 201) {
+      setOrderInfo({
+        orderId: data.id,
+        orderStatus: data.estado,
+      });
+      setShowModal(true);
+      clearCart();
+      formik.resetForm();
+    }
+  } catch (error) {
+    console.error("Error:", error);
+  }
+	};
     const total = () =>
     cart.reduce(
         (acumulador, valorActual) =>
-        acumulador +  valorActual.cantidad * valorActual.precio,
+        acumulador +  parseFloat(inputValue2) * valorActual.precio,
         0,
     )
-
     const onSubmit = () => {
       if (cart.length === 0) {
         alert("El carrito está vacío. Agrega productos antes de comprar.");
@@ -65,14 +130,27 @@ export const CartElements = () => {
             "Por favor, completa todos los campos obligatorios de manera correcta."
           );
         } else {
+          const numericInputValue2 = parseFloat(inputValue2);
+
+          if (isNaN(numericInputValue2)) {
+            alert("El valor ingresado no es válido. Ingresa un número.");
+            return;
+          }
+          cart.forEach((producto) => {
+            addCart(producto, numericInputValue2);
+          });
           postUsuario();
           clearCart();
-          formik.resetForm();
         }
       }
     };
     const formik = useFormik({
-      initialValues,
+      initialValues: {
+        name: "",   
+        phone: "",  
+        address: "",
+        checkbox: false,
+      },
       enableReinitialize: true,
       validationSchema,
       onSubmit,
@@ -82,7 +160,7 @@ export const CartElements = () => {
       if (cart.length === 0) {
         alert("El carrito está vacío. Agrega productos antes de comprar.");
       } else {
-        if (formik.values === Empty) {
+        if (Object.keys(formik.values).length === 0) {
           alert(
             "Por favor, completa todos los campos obligatorios de manera correcta."
           );
@@ -93,26 +171,18 @@ export const CartElements = () => {
         }
       }
     };
-    
-    
-
 	const removeItemFromCart = (id) => {
 		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	}
 
     const clearCart = () => {
     setCart([]);
+    formik.resetForm();
+    localStorage.removeItem('cart');
+    localStorage.removeItem('inputValue1', inputValue1);
+    localStorage.removeItem('inputValue2', inputValue2);
+    localStorage.removeItem('formData', JSON.stringify(formik.values));
     };
-
-
-	const updateQuantity = (id, newQuantity) => {
-		setCart((prevCart) =>
-		  prevCart.map((item) =>
-			item.id === id ? { ...item, cantidad: newQuantity } : item
-		  )
-		);
-	  };
-	
         return ( 
             <>
             <Table style={{backgroundColor:"gray", color:"white"}} striped bordered hover variant="dark">
@@ -121,7 +191,7 @@ export const CartElements = () => {
                     <th>Nombre</th>
                     <th>img</th>
                     <th>Precio</th>
-                    <th>Descripcion</th>
+                    <th>Detalles del pedido</th>
                     <th>Cantidad</th>
                 </tr>
             </thead>
@@ -137,17 +207,10 @@ export const CartElements = () => {
                             />
                         </td>
                         <td>{producto.precio}</td>
-                        <td>{producto.detail}</td>
-						<td>
-						    <input
-                                type="number"
-                                value={producto.cantidad}
-                                onChange={(e) => updateQuantity(producto.id, parseInt(e.target.value))}
-                                min="1"
-                            />
-                        </td>
+                        <td>{inputValue1}</td>
+						            <td>{inputValue2}</td>
                         <td>
-							<Button variant="danger" onClick={() => removeItemFromCart(producto.id)}>								
+							              <Button variant="danger" onClick={() => removeItemFromCart(producto.id)}>								
                                  Eliminar
                             </Button>
                         </td>
@@ -163,10 +226,9 @@ export const CartElements = () => {
                     <td></td>
                 </tr>
             </tfoot>
-
         </Table>
-		<Button variant="danger" onClick={clearCart}>
-            Limpiar Carrito
+		    <Button variant="danger" onClick={clearCart}>
+          Limpiar Carrito
         </Button>
 		<br />
     <br />
@@ -174,7 +236,10 @@ export const CartElements = () => {
         <Form.Group className="mb-3" controlId="formBasicName">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              localStorage.setItem('formData', JSON.stringify(formik.values));
+            }}
             type="text"
             name="name"
             className={
@@ -182,7 +247,7 @@ export const CartElements = () => {
               formik.touched.name &&
               "error"
           }
-            maxLength={20}
+            maxLength={30}
 						minLength={3}
 	 					value={formik.values.name}
 	 					onBlur={formik.handleBlur}
@@ -194,7 +259,10 @@ export const CartElements = () => {
         <Form.Group className="mb-3" controlId="formBasicPhone">
           <Form.Label>Telefono</Form.Label>
           <Form.Control
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              localStorage.setItem('formData', JSON.stringify(formik.values));
+            }}
             type="number"
             name="phone"
             className={
@@ -202,7 +270,7 @@ export const CartElements = () => {
               formik.touched.phone &&
               "error"
           }
-            maxLength={40}
+            maxLength={25}
 						minLength={7}
 	 					value={formik.values.phone}
 	 					onBlur={formik.handleBlur}
@@ -214,7 +282,10 @@ export const CartElements = () => {
         <Form.Group className="mb-3" controlId="formBasicAddress">
           <Form.Label>Direccion</Form.Label>
           <Form.Control
-            onChange={formik.handleChange}
+            onChange={(e) => {
+              formik.handleChange(e);
+              localStorage.setItem('formData', JSON.stringify(formik.values));
+            }}
             type="address"
             name="address"
             className={
@@ -231,15 +302,67 @@ export const CartElements = () => {
             <div className="errorMessage">{formik.errors.address}</div>
           )}  
         </Form.Group>
+        <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Check 
+            onChange={formik.handleChange}
+            value={formik.values.checkbox}
+            name="checkbox"
+            type="checkbox" 
+            label="Pago en efectivo"
+            onBlur={formik.handleBlur}
+            className={
+              formik.errors.checkbox &&
+              formik.touched.checkbox &&
+              "error"
+          } />
+          {formik.touched.checkbox && formik.errors.checkbox && (
+            <div className="errorMessage">{formik.errors.checkbox}</div>
+          )} 
+        </Form.Group>
         <Button 
           variant="primary" 
           className="btn btn-info btn-block mt-4"
           type="submit" 
           onClick={handleSubmit}
-          disabled={!formik.isValid || cart.length === 0}>
+          disabled={!formik.isValid || cart.length === 0 || !formik.values.checkbox}>
           Comprar
         </Button>
-        </Form>
+        <Button
+        variant="primary"
+        className="btn btn-info btn-block mt-4"
+        type="button"
+        onClick={handleMercPago}
+        disabled={!formik.isValid || cart.length === 0}
+        >
+        Pago Online
+        </Button>
+        {preferenceId && <Wallet initialization={{ preferenceId }} />}
+        <br />
+        <br />
+        <div className="enviar_pedido">
+        <h6>Si tu pago online fue aprobado hacer click aqui</h6>
+        <Button
+        variant="primary"
+        className="btn btn-info btn-block mt-4"
+        type="button"
+        onClick={postUsuario}
+        disabled={!formik.isValid || cart.length === 0}
+        >
+        Enviar Pedido 
+        </Button>
+        </div>
+    </Form>
+        <Modal show={showModal} onHide={() =>setShowModal(false)}>
+            <Modal.Header closeButton>
+              <Modal.Title>Detalles de la Orden</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>¡Pedido Realizado Exitosamente!</p>
+              <p>Demora aproximada 35 minutos</p>
+              <p>ID de la Orden: {orderInfo.orderId}</p>
+              <p>Estado de la Orden: {orderInfo.orderStatus}</p>
+            </Modal.Body>
+        </Modal>
         </>
     )
 };

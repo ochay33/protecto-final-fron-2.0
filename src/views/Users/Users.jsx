@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Container from "react-bootstrap/Container"
 
+import "../../css/usuarios.css"
 
 export const Users = () => {
 	const [users, setUsers] = useState([])
@@ -76,21 +77,20 @@ export const Users = () => {
 
 
 	return (
-		<Container className="mt-4" id="admin">
-			<h1 style={{ color: "white"}}>Admin</h1>
+		<Container id="admin">
+			<h1>Admin</h1>
 			{!showForm && (
 				<table className="table">
 					<thead className="thead-dark">
 						<tr style={{ color: "white"}}>
-							<th scope="col">Username</th>
-							<th scope="col">Role</th>
+							<th scope="col">Usuario</th>
+							<th scope="col">Rol</th>
 
                             <th scope="col">Mail</th>
 							<th scope="col">Opciones</th>
 						</tr>
 					</thead>
-					<tbody style={{backgroundColor:"white"}}>
-
+					<tbody>
 						{users.map(user => (
 							<tr key={user.id}>
 								<td className="letra_tabla">{user.username}</td>
@@ -98,7 +98,7 @@ export const Users = () => {
 
                                 <td className="letra_tabla">{user.email}</td>
 								<td>
-									<button
+									<button id="botonEliminar"
 										className="btn btn-danger mr-2 mb-2"
 										onClick={() =>
 											handleDelete(user.id, user.username)
@@ -106,7 +106,7 @@ export const Users = () => {
 									>
 										Eliminar
 									</button>
-									<button
+									<button id="botonEditar"
 										className="btn btn-warning mr-2 mb-2 "
 										onClick={() => handleEdit(user)}
 									>

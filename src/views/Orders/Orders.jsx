@@ -2,9 +2,14 @@ import { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import axios from "axios"
 
+import "../../css/orders.css"
+
+
 export const Orders = () => {
 	const [orders, setOrders] = useState([])
 	const [showTable, setShowTable] = useState(false)
+	const [showButtons, setShowButtons] = useState(false);
+
 
 	useEffect(() => {
 		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-Orders`)
@@ -63,28 +68,50 @@ export const Orders = () => {
 		}
 	};
 	const handleShow = () => {
-		setShowTable(true)
+		setShowTable(true);
+		setShowButtons(true);
 	};
 	const handleHide = () => {
-		setShowTable(false)
+		setShowTable(false);
+		setShowButtons(false);
 	};
 	
+	const handleDelete = async () => {
+		let validator = window.confirm(
+			`Esta seguro que desea eliminar las ordenes enviadas?`
+		)
+		if (validator){
+			try {
+			  await axios.delete(`${import.meta.env.VITE_SERVER_URI}/api/delete-all-orders`, {
+				headers: {
+				  Authorization: "Bearer " + localStorage.getItem("token"),
+				},
+			  });
+			  const ordersToKeep = orders.filter((order) => order.estado !== "Enviado");
+			  setOrders(ordersToKeep);  
+			} catch (error) {
+			  console.error("Error al eliminar órdenes: ", error);
+			}}
+	};
+	
+	
 	return (
-		<Container className="mt-4" id="admin">
-			<h1 style={{ color: "white"}}>Pedidos</h1>
+		<Container id="admin">
+			<h1 className="h1">Pedidos</h1>
 				<table className="table">
 					<thead className="thead-dark">
-					    <tr style={{textAlign:"center",  display:"flex", justifyContent:"center", width:"246%", backgroundColor:"red"}}>
+					    <tr>
                             <th colSpan="4">Pedidos en espera</th>
                         </tr>
-						<tr style={{ color: "white"}}>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Datos del Cliente</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Menus</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Total</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Aceptar pedido</th>
+						<tr className="tr">
+							<th className="th"  scope="col">Datos del Cliente</th>
+							<th className="th"  scope="col">Menus</th>
+							<th className="th"  scope="col">Detalles del pedido</th>
+							<th className="th"  scope="col">Total</th>
+							<th className="th"  scope="col">Aceptar pedido</th>
 						</tr>
 					</thead>
-					<tbody style={{ backgroundColor: "gray" }}>{orders.filter((order) => order.estado === "En espera")
+					<tbody className="tbody">{orders.filter((order) => order.estado === "En espera")
                     .map((order) => (
                         <tr key={order._id}>
                             <th className="letra_tabla"> 
@@ -98,14 +125,15 @@ export const Orders = () => {
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
-                                        <li> {item.title} - Cantidad: {item.cantidad}
+                                        <li> {item.title} - Cantidad: {order.cantidad}
                                         </li>
                                     </ul>
                                 </div> ))}
                             </td>
-                            <td style={{ textAlign: "center" }} className="letra_tabla">{order.total}
+							<td className="detallesOrdenes">{order.detalles}</td>
+                            <td  className="letra_tabla">{order.total}
                             </td>
-                            <td style={{ textAlign: "center" }}>
+                            <td >
                                 <button onClick={() => handleAcceptOrder(order._id)}>
 									Aceptar
 								</button>
@@ -115,17 +143,18 @@ export const Orders = () => {
 				</table>
 				<table className="table">
 					<thead className="thead-dark">
-					<tr style={{textAlign:"center",  display:"flex", justifyContent:"center", width:"246%", backgroundColor:"red"}}>
+					<tr>
                             <th colSpan="4">Pedidos en proceso</th>
                         </tr>
 						<tr style={{ color: "white"}}>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Datos del Cliente</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Menus</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Total</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Finalizar Pedido</th>
+							<th className="th" scope="col">Datos del Cliente</th>
+							<th className="th" scope="col">Menus</th>
+							<th className="th"  scope="col">Detalles del pedido</th>
+							<th className="th" scope="col">Total</th>
+							<th className="th" scope="col">Finalizar Pedido</th>
 						</tr>
 					</thead>
-					<tbody style={{ backgroundColor: "gray" }}>{orders.filter((order) => order.estado === "En proceso")
+					<tbody className="tbody">{orders.filter((order) => order.estado === "En proceso")
                     .map((order) => (
                         <tr key={order._id}>
                             <th className="letra_tabla"> 
@@ -139,14 +168,15 @@ export const Orders = () => {
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
-                                        <li> {item.title} - Cantidad: {item.cantidad}
+                                        <li> {item.title} - Cantidad: {order.cantidad}
                                         </li>
                                     </ul>
                                 </div> ))}
                             </td>
-                            <td style={{ textAlign: "center" }} className="letra_tabla">{order.total}
+							<td className="detallesOrdenes">{order.detalles}</td>
+                            <td  className="letra_tabla">{order.total}
                             </td>
-                            <td style={{ textAlign: "center" }}>
+                            <td >
                                 <button onClick={() => handleFinishOrder(order._id)}>
 									Finalizar
 								</button>
@@ -154,19 +184,20 @@ export const Orders = () => {
                         </tr>))}
                     </tbody>
 				</table>
-				<table className="table">
+				<table className="table" >
 					<thead className="thead-dark">
-					<tr style={{textAlign:"center",  display:"flex", justifyContent:"center", width:"246%", backgroundColor:"red"}}>
+					<tr>
                             <th colSpan="4">Pedidos terminados</th>
                         </tr>
 						<tr style={{ color: "white"}}>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Datos del Cliente</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Menus</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Total</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Pedidos Terminados</th>
+							<th className="th" scope="col">Datos del Cliente</th>
+							<th className="th" scope="col">Menus</th>
+							<th className="th"  scope="col">Detalles del pedido</th>
+							<th className="th" scope="col">Total</th>
+							<th className="th" scope="col">Pedidos Terminados</th>
 						</tr>
 					</thead>
-					<tbody style={{ backgroundColor: "gray" }}>{orders.filter((order) => order.estado === "Terminado")
+					<tbody className="tbody">{orders.filter((order) => order.estado === "Terminado")
                     .map((order) => (
                         <tr key={order._id}>
                             <th className="letra_tabla"> 
@@ -180,14 +211,15 @@ export const Orders = () => {
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
-                                        <li> {item.title} - Cantidad: {item.cantidad}
+                                        <li> {item.title} - Cantidad: {order.cantidad}
                                         </li>
                                     </ul>
                                 </div> ))}
                             </td>
-                            <td style={{ textAlign: "center" }} className="letra_tabla">{order.total}
+							<td className="detallesOrdenes">{order.detalles}</td>
+                            <td  className="letra_tabla">{order.total}
                             </td>
-                            <td style={{ textAlign: "center" }}>
+                            <td >
                                 <button onClick={() => handleSendOrder(order._id)}>
 									Enviar
 								</button>
@@ -195,22 +227,23 @@ export const Orders = () => {
                         </tr>))}
                     </tbody>
 				</table>
-				<button onClick={handleShow} style={{ textAlign: "center" }}>
+				<button onClick={handleShow}>
 					Mostrar Pedidos enviados
 				</button>
 				{showTable && (
-					<table className="table">
+					<table className="table" style={{marginBottom:"0"}}>
 					<thead className="thead-dark">
-					<tr style={{textAlign:"center",  display:"flex", justifyContent:"center", width:"246%", backgroundColor:"red"}}>
+					<tr>
                             <th colSpan="4">Pedidos Enviados</th>
                         </tr>
-						<tr style={{ color: "white"}}>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Datos del Cliente</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Menus</th>
-							<th style={{textAlign:"center", border: "1px solid #ccc"}} scope="col">Total</th>
+						<tr>
+							<th className="th" scope="col">Datos del Cliente</th>
+							<th className="th" scope="col">Menus</th>
+							<th className="th" scope="col">Detalles del pedido</th>
+							<th className="th" scope="col">Total</th>
 						</tr>
 					</thead>
-					<tbody style={{ backgroundColor: "gray" }}>{orders.filter((order) => order.estado === "Enviado")
+					<tbody className="tbody">{orders.filter((order) => order.estado === "Enviado")
                     .map((order) => (
                         <tr key={order._id}>
                             <th className="letra_tabla"> 
@@ -222,18 +255,37 @@ export const Orders = () => {
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
-                                        <li> {item.title} - Cantidad: {item.cantidad}
+                                        <li> {item.title} - Cantidad: {order.cantidad}
                                         </li>
                                     </ul>
                                 </div> ))}
                             </td>
-                            <td style={{ textAlign: "center" }} className="letra_tabla">{order.total}
+							<td className="detallesOrdenes">{order.detalles}</td>
+                            <td  className="letra_tabla">{order.total}
                             </td>
                         </tr>))}
                     </tbody>
-					<button onClick={handleHide}>Aceptar</button>
+					<tfoot>
+                        <tr>
+                            <td className="td"></td>
+							<td className="td"></td>
+							<td className="td"></td>
+							<td className="td">{orders .filter((order) => order.estado === "Enviado")
+                                .reduce((total, order) => total + order.total, 0)}
+							</td>
+                        </tr>
+                    </tfoot>
 				</table>
-				
+				)} 
+                {showButtons && (
+				<div className="botones">
+				    <button className="boton1" onClick={handleHide}>
+				    Aceptar
+				    </button>
+				    <button className="boton2" onClick={handleDelete}>
+		            Eliminar
+				    </button>
+				</div>
 				)}
 		</Container>
 	)		

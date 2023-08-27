@@ -8,6 +8,7 @@ export const Administrador = () => {
 	const [menues, setMenues] = useState([])
 	const [menuEditable, setMenuEditable] = useState({})
 	const [showForm, setShowForm] = useState(false)
+	const [showButtons, setShowButtons] = useState(true);
 	const [createOrEdit, setCreateOrEdit] = useState("")
 
 	useEffect(() => {
@@ -59,7 +60,8 @@ export const Administrador = () => {
 			const othersMenues = menues.filter(prev => prev.id !== menu.id)
 			setMenues([...othersMenues, menu])
 		}
-		setShowForm(false)
+		setShowForm(false);
+		setShowButtons(true);
 	}
 
 	const createMenu = async menu => {
@@ -84,7 +86,8 @@ export const Administrador = () => {
 			const othersMenues = menues.filter(prev => prev.id !== menu.id)
 			setMenues([...othersMenues, menu])
 		}
-		setShowForm(false)
+		setShowForm(false);
+		setShowButtons(true);
 	}
 
 	const handleDelete = (id, title) => {
@@ -98,29 +101,30 @@ export const Administrador = () => {
 		setShowForm(true)
 		setMenuEditable(menu)
 		setCreateOrEdit("edit")
+		setShowButtons(false);
 	}
 
 	const handleCreate = () => {
 		setShowForm(true)
 		setMenuEditable({})
 		setCreateOrEdit("create")
+		setShowButtons(false);
 	}
-
 	return (
-		<Container className="mt-4" id="admin">
-			<h1 style={{ color: "white"}}>Admin</h1>
+		<Container id="admin">
+			<h1>Admin</h1>
 			{!showForm && (
-				<table className="table">
+				<table className="table" id="table">
 					<thead className="thead-dark">
 						<tr style={{ color: "white"}}>
-							<th style={{border: "1px solid #ccc"}} scope="col">Titulo</th>
-							<th style={{border: "1px solid #ccc"}} scope="col">Detalle</th>
-							<th style={{border: "1px solid #ccc"}} scope="col">Categoria</th>
-							<th style={{border: "1px solid #ccc"}} scope="col">Precio</th>
-							<th style={{border: "1px solid #ccc"}} scope="col">Botones</th>
+							<th id="th" scope="col">Titulo</th>
+							<th id="th" scope="col">Detalle</th>
+							<th id="th" scope="col">Categoria</th>
+							<th id="th" scope="col">Precio</th>
+							<th id="th" scope="col">Botones</th>
 						</tr>
 					</thead>
-					<tbody style={{backgroundColor:"white", color:"black"}}>
+					<tbody id="tbody">
 						{menues.map(menu => (
 							<tr key={menu.id}>
 								<th className="letra_tabla">{menu.title}</th>
@@ -128,7 +132,7 @@ export const Administrador = () => {
 								<td className="letra_tabla">{menu.categoria}</td>
 								<td className="letra_tabla">{menu.precio}</td>
 								<td>
-									<button
+									<button id="botones"
 										className="btn btn-danger mr-2 mb-2"
 										onClick={() =>
 											handleDelete(menu.id, menu.title)
@@ -136,7 +140,7 @@ export const Administrador = () => {
 									>
 										Eliminar
 									</button>
-									<button
+									<button id="botones"
 										className="btn btn-warning mr-2 mb-2 "
 										onClick={() => handleEdit(menu)}
 									>
@@ -148,11 +152,11 @@ export const Administrador = () => {
 					</tbody>
 				</table>
 			)}
-			<button onClick={handleCreate}>Crear nuevo</button>
+			{showButtons && ( <button onClick={handleCreate}>Crear nuevo</button>)}
 			{showForm && (
 				<form>
-					<div style={{ color: "white"}}>
-						<label>Título</label>
+					<div id="label">
+						<label><h3 id="h3" >Título</h3></label>
 						<input
 							type="text"
 							value={menuEditable.title}
@@ -163,8 +167,8 @@ export const Administrador = () => {
 							}
 						/>
 					</div>
-					<div style={{ color: "white"}}>
-						<label>Descipcion</label>
+					<div id="label">
+						<label><h4 id="h3" >Descripcion</h4></label>
 						<textarea
 							value={menuEditable.detail}
 							onChange={event =>
@@ -174,8 +178,8 @@ export const Administrador = () => {
 							}
 						></textarea>
 					</div>
-					<div style={{ color: "white"}}>
-						<label>categoria</label>
+					<div id="label">
+						<label><h3 id="h3" >Categoria</h3></label>
 						<textarea
 							value={menuEditable.categoria}
 							onChange={event =>
@@ -185,8 +189,8 @@ export const Administrador = () => {
 							}
 						></textarea>
 					</div>
-					<div style={{ color: "white"}}>
-						<label>precio</label>
+					<div id="label">
+						<label><h3 id="h3" >Precio</h3></label>
 						<textarea
 							value={menuEditable.precio}
 							onChange={event =>
@@ -196,8 +200,8 @@ export const Administrador = () => {
 							}
 						></textarea>
 					</div>
-					<div style={{ color: "white"}}>
-						<label>Imagen</label>
+					<div id="label">
+						<label><h3 id="h3" >Imagen</h3></label>
 						<input
 							type="text"
 							value={menuEditable.img}
@@ -209,7 +213,7 @@ export const Administrador = () => {
 						/>
 					</div>
 					{createOrEdit === "edit" && (
-						<button
+						<button id="botoncrear" 
 							type="button"
 							onClick={() => updateMenu(menuEditable)}
 						>
@@ -217,7 +221,7 @@ export const Administrador = () => {
 						</button>
 					)}
 					{createOrEdit === "create" && (
-						<button
+						<button id="botoncrear" 
 							type="button"
 							onClick={() => createMenu(menuEditable)}
 						>

@@ -1,0 +1,21 @@
+h1{
+    color: white;
+}
+tbody{
+    background-color: white;
+}
+#botonEliminar{
+    width: 100px;
+    margin-right: 5px;
+}
+#botonEditar{
+    width: 100px;
+}
+#admin{
+    width: 150vh;
+}
+@media (max-width:576px){
+    #admin{
+        width: 50vh;
+    }
+}

@@ -7,7 +7,22 @@
 }
 
 .home-container img {
-  width: 100%;
+  width: 80%;
+}
+.mt-4{
+  display: flex;
+  justify-content: center;
+}
+.text-center{
+  display: flex;
+  justify-content: center;
+}
+.imagen{
+  width: 200vh;
+}
+.text-center {
+  display: flex;
+  justify-content: center;
 }
 
 .text-grey {
@@ -24,3 +39,24 @@ body {
   background-size: cover;
   background-position: center center;
 }
+@media (max-width: 800px){
+  .imagen{
+    width: 150vh;
+  }
+}
+@media (max-width: 600px){
+  .imagen{
+    width: 100vh;
+  }
+}
+@media (max-width: 400px){
+  .imagen{
+    width: 50vh;
+  }
+}
+@media (max-width: 200px){
+  .imagen{
+    width: 25vh;
+  }
+}
+

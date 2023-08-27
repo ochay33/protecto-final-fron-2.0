@@ -1,18 +1,19 @@
 import backgroundImage from '../../img/logo2.png';
+import "../../css/contacto.css";
 
 export const Contacto = () => {
     return (
         <>
-        <div className="col-sm-12 col-md-6 col-lg-6" id="fondo" style={{display:"flex", justifyContent:"center", color:"white"}}>
+        <div className="col-sm-12 col-md-6 col-lg-6" id="fondo">
             <h2>CONTACTO</h2>
             <br />
             <br />
         </div>
         <div className="container alturaParaFooter my-4 carritoAlturaFooter">
-            <div className="row" style={{display:"flex", justifyContent:"center", border: "1px solid #ccc", width:"100%"}}>
+            <div id="todo" className="row">
               
-              <div className="col-sm-12 col-md-6 col-lg-6" style={{display:"flex-inline", justifyContent:"center", color:"white"}}>
-                <h2 style={{textAlign:"center"}}>INFORMACIÓN</h2>
+              <div id="contenido" className="col-sm-12 col-md-6 col-lg-6">
+                <h2>INFORMACIÓN</h2>
                 <hr />
                 <ul>
                   <li>
@@ -32,8 +33,8 @@ export const Contacto = () => {
               </div>
             </div>
         </div>
-        <div style={{display:"flex", justifyContent:"center", width:"100%"}}>
-        <img style={{height:"10rem"}} src={backgroundImage} alt="Fondo" />
+        <div id="divimagen">
+        <img id="imagen" src={backgroundImage} alt="Fondo" />
         </div>
         </>
       );

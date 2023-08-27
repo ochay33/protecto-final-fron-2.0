@@ -1,7 +1,20 @@
-body {
-  background-image: url(../img/fondohome10.jpg);
-  /* background-repeat: no-repeat; */
-  background-size: cover;
-  background-position: center;
-  height: 100vh;
+#container{
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+#cards{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+.mt-4{
+  width: 100%;
+}
+#nav{
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }

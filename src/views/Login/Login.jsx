@@ -5,6 +5,7 @@ import axios from "axios"
 import Button from "react-bootstrap/Button"
 import Form from "react-bootstrap/Form"
 import Container from "react-bootstrap/Container"
+import "../../css/login.css"
 
 const validationSchema = () =>
 	Yup.object().shape({
@@ -67,11 +68,8 @@ export const Login = () => {
 
 	return (
 		<Container className="mt-4">
-			<Form
-				style={{ width: 500, margin: "auto", color: "white" }}
-				onSubmit={formik.handleSubmit}
-			>
-				<h1 style={{textAlign: "center"}}>Iniciar sesión</h1>
+			<Form onSubmit={formik.handleSubmit}>
+				<h1>Iniciar sesión</h1>
 				<Form.Group className="mb-3" controlId="formBasicEmail">
 					<Form.Label>Mail</Form.Label>
 					<Form.Control
@@ -112,7 +110,7 @@ export const Login = () => {
 						<div className="errorMessage">{formik.errors.password}</div>
 					)}
 				</Form.Group>
-				<Button variant="primary" type="submit" onClick={onSubmit}>
+				<Button id="logueo" variant="primary" type="submit" onClick={onSubmit}>
 					Loguearse
 				</Button>
 			</Form>
