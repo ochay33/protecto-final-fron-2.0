@@ -48,3 +48,43 @@ tr {
 .detallesOrdenes{
     color: black;
 }
+#responsive-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  #responsive-table th,
+  #responsive-table td {
+    padding: 8px;
+    text-align: center;
+  }
+
+@media (max-width: 680px) {
+    #responsive-table th,
+    #responsive-table td {
+      display: grid;
+      width: 100%;
+      box-sizing: border-box;
+      text-align: center;
+    }
+  
+    #responsive-table th {
+      font-weight: bold;
+    }
+
+    .tr{
+        display: none;
+    }
+  
+    #responsive-table td:before {
+      content: attr(data-label);
+      display: inline-block;
+      font-weight: bold;
+      width: 50%;
+      margin-right: 5px;
+    }
+  }
+
+  
+  

@@ -98,10 +98,10 @@ export const Orders = () => {
 	return (
 		<Container id="admin">
 			<h1 className="h1">Pedidos</h1>
-				<table className="table">
-					<thead className="thead-dark">
+				<table id="responsive-table" className="table">	    
+					<thead  className="thead-dark">
 					    <tr>
-                            <th colSpan="4">Pedidos en espera</th>
+						    <td colSpan="5">Pedidos en espera</td>
                         </tr>
 						<tr className="tr">
 							<th className="th"  scope="col">Datos del Cliente</th>
@@ -114,14 +114,14 @@ export const Orders = () => {
 					<tbody className="tbody">{orders.filter((order) => order.estado === "En espera")
                     .map((order) => (
                         <tr key={order._id}>
-                            <th className="letra_tabla"> 
+                            <td className="letra_tabla" data-label="Datos del Cliente:"> 
                                 <ul>
                                     <li>Nombre: {order.datos.name}</li>
                                     <li>Telefono: {order.datos.phone}</li>
                                     <li>Direccion: {order.datos.address}</li>
                                  </ul>
-                            </th>
-                            <td className="letra_tabla">
+                            </td>
+                            <td className="letra_tabla" data-label="Menus:">
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
@@ -130,8 +130,8 @@ export const Orders = () => {
                                     </ul>
                                 </div> ))}
                             </td>
-							<td className="detallesOrdenes">{order.detalles}</td>
-                            <td  className="letra_tabla">{order.total}
+							<td className="detallesOrdenes" data-label="Detalles del pedido:">{order.detalles}</td>
+                            <td  className="letra_tabla" data-label="Total:">{order.total}
                             </td>
                             <td >
                                 <button onClick={() => handleAcceptOrder(order._id)}>
@@ -141,12 +141,12 @@ export const Orders = () => {
                         </tr>))}
                     </tbody>
 				</table>
-				<table className="table">
+				<table id="responsive-table" className="table">
 					<thead className="thead-dark">
-					<tr>
-                            <th colSpan="4">Pedidos en proceso</th>
+					    <tr>
+                            <td colSpan="5">Pedidos en proceso</td>
                         </tr>
-						<tr style={{ color: "white"}}>
+						<tr className="tr">
 							<th className="th" scope="col">Datos del Cliente</th>
 							<th className="th" scope="col">Menus</th>
 							<th className="th"  scope="col">Detalles del pedido</th>
@@ -157,14 +157,14 @@ export const Orders = () => {
 					<tbody className="tbody">{orders.filter((order) => order.estado === "En proceso")
                     .map((order) => (
                         <tr key={order._id}>
-                            <th className="letra_tabla"> 
+                            <td className="letra_tabla" data-label="Datos del Cliente:"> 
                                 <ul>
                                     <li>Nombre: {order.datos.name}</li>
                                     <li>Telefono: {order.datos.phone}</li>
                                     <li>Direccion: {order.datos.address}</li>
                                  </ul>
-                            </th>
-                            <td className="letra_tabla">
+                            </td>
+                            <td className="letra_tabla" data-label="Menus:">
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
@@ -173,8 +173,8 @@ export const Orders = () => {
                                     </ul>
                                 </div> ))}
                             </td>
-							<td className="detallesOrdenes">{order.detalles}</td>
-                            <td  className="letra_tabla">{order.total}
+							<td className="detallesOrdenes" data-label="Detalles del pedido:">{order.detalles}</td>
+                            <td  className="letra_tabla" data-label="Total:">{order.total}
                             </td>
                             <td >
                                 <button onClick={() => handleFinishOrder(order._id)}>
@@ -184,12 +184,12 @@ export const Orders = () => {
                         </tr>))}
                     </tbody>
 				</table>
-				<table className="table" >
+				<table id="responsive-table" className="table" >
 					<thead className="thead-dark">
-					<tr>
-                            <th colSpan="4">Pedidos terminados</th>
+					    <tr>
+                            <td colSpan="5">Pedidos terminados</td>
                         </tr>
-						<tr style={{ color: "white"}}>
+						<tr className="tr">
 							<th className="th" scope="col">Datos del Cliente</th>
 							<th className="th" scope="col">Menus</th>
 							<th className="th"  scope="col">Detalles del pedido</th>
@@ -200,14 +200,14 @@ export const Orders = () => {
 					<tbody className="tbody">{orders.filter((order) => order.estado === "Terminado")
                     .map((order) => (
                         <tr key={order._id}>
-                            <th className="letra_tabla"> 
+                            <td className="letra_tabla" data-label="Datos del Cliente:"> 
                                 <ul>
                                     <li>Nombre: {order.datos.name}</li>
                                     <li>Telefono: {order.datos.phone}</li>
                                     <li>Direccion: {order.datos.address}</li>
                                  </ul>
-                            </th>
-                            <td className="letra_tabla">
+                            </td>
+                            <td className="letra_tabla" data-label="Menus:">
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
@@ -216,8 +216,8 @@ export const Orders = () => {
                                     </ul>
                                 </div> ))}
                             </td>
-							<td className="detallesOrdenes">{order.detalles}</td>
-                            <td  className="letra_tabla">{order.total}
+							<td className="detallesOrdenes" data-label="Detalles del pedido:">{order.detalles}</td>
+                            <td  className="letra_tabla" data-label="Total:">{order.total}
                             </td>
                             <td >
                                 <button onClick={() => handleSendOrder(order._id)}>
@@ -231,12 +231,12 @@ export const Orders = () => {
 					Mostrar Pedidos enviados
 				</button>
 				{showTable && (
-					<table className="table" style={{marginBottom:"0"}}>
+				<table id="responsive-table" className="table" style={{marginBottom:"0"}}>
 					<thead className="thead-dark">
-					<tr>
-                            <th colSpan="4">Pedidos Enviados</th>
+					    <tr>
+                            <td colSpan="5">Pedidos Enviados</td>
                         </tr>
-						<tr>
+						<tr className="tr">
 							<th className="th" scope="col">Datos del Cliente</th>
 							<th className="th" scope="col">Menus</th>
 							<th className="th" scope="col">Detalles del pedido</th>
@@ -246,12 +246,12 @@ export const Orders = () => {
 					<tbody className="tbody">{orders.filter((order) => order.estado === "Enviado")
                     .map((order) => (
                         <tr key={order._id}>
-                            <th className="letra_tabla"> 
+                            <td className="letra_tabla" data-label="Datos del Cliente:"> 
                                 <ul>
                                     <li>Direccion: {order.datos.address}</li>
                                  </ul>
-                            </th>
-                            <td className="letra_tabla">
+                            </td>
+                            <td className="letra_tabla" data-label="Menus:">
                                 {order.items.map((item) => (
                                 <div key={item.id}>
                                     <ul>
@@ -260,8 +260,8 @@ export const Orders = () => {
                                     </ul>
                                 </div> ))}
                             </td>
-							<td className="detallesOrdenes">{order.detalles}</td>
-                            <td  className="letra_tabla">{order.total}
+							<td className="detallesOrdenes" data-label="Detalles del pedido:">{order.detalles}</td>
+                            <td  className="letra_tabla" data-label="Total:">{order.total}
                             </td>
                         </tr>))}
                     </tbody>

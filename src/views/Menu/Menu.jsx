@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import { DataContext } from "../../components/DataContext/DataContext";
 import { useNavigate } from "react-router-dom"
 import { useData } from "../../components/DataContext/DataContext";
+
 import "../../css/menu.css";
 
 
@@ -34,61 +35,44 @@ export const Menu = () => {
     navigate("/menues")
   };
   return (
-    <div className="container mt-5 curso">
-      <div className="row">
-        <div className="col">
-          <div className="my-4">
-            <h3>{menu.title}</h3>
-          </div>
-        </div>
+    <div className="menu-container">
+      <div className="menu-header">
+        <h1>{menu.title}</h1>
       </div>
-      <div className="row">
-        <div className="col-6">
-          <img src={menu.img} width="100%" alt={menu.title} />
+      <div className="menu-content">
+        <div className="menu-image">
+        <img src={menu.img} alt={menu.title} style={{ maxWidth: "600px" }} />
         </div>
-        <div className="col-6">
-          <div className="card ml-3 w-100">
-            <div className="card-header">
-              <h3 className="titulo">{menu.title}</h3>
+        <div className="menu-details">
+          <div className="menu-title">
+            <h2>{menu.title}</h2>
+          </div>
+          <div className="menu-description">
+            <p>{menu.detail}</p>
+            <p>Precio: ${menu.precio}</p>
+          </div>
+          <div className="menu-inputs">
+            <div className="menu-input">
+              <h5>Detalles del pedido</h5>
+              <input
+                placeholder="Describe tu menú aquí"
+                type="text"
+                value={inputValue1}
+                onChange={handleInputChange1}
+              />
             </div>
-            <div className="card-body">
-              <h4 className="card-title">Detalle del menú</h4>
-              <hr />
-              <ul>
-                <p>{menu.detail}</p>
-                <p>${menu.precio}</p>
-              </ul>
-            <div className="card-body">
-            <h4 className="card-title">Detalles del pedido</h4>
-               <hr />
-               <ul>
-                <p><input
-              placeholder="decribe tu menu aqui"  
-							type="text"
-							value={inputValue1}
-							onChange={handleInputChange1}
-						/></p>
-               </ul>
-            </div>
-            <hr />
-            <div className="card-body">
-                <ul><h2>Elegir Cantidad</h2>
-                <br />
-                  <p>
-                    <input style={{textAlign: 'center'}}
-                      placeholder="cuantos Menús deseas"  
-							        type="number"
-							        value={inputValue2}
-                      min={1}
-							        onChange={handleInputChange2}
-						        />
-                  </p>
-                </ul>
-            </div>
-              
-              <Button onClick={handleAddToCart}>Agregar al Carrito</Button>
+            <div className="menu-input">
+              <h5>Elegir Cantidad</h5>
+              <input
+                placeholder="¿Cuántos menús deseas?"
+                type="number"
+                value={inputValue2}
+                min={1}
+                onChange={handleInputChange2}
+              />
             </div>
           </div>
+          <Button onClick={handleAddToCart}>Agregar al Carrito</Button>
         </div>
       </div>
     </div>

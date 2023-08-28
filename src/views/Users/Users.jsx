@@ -80,9 +80,12 @@ export const Users = () => {
 		<Container id="admin">
 			<h1>Admin</h1>
 			{!showForm && (
-				<table className="table">
+				<table id="responsive-table" className="table">
 					<thead className="thead-dark">
-						<tr style={{ color: "white"}}>
+						<tr id="administradorUsuarios">
+							<td>Administrador de usuarios</td>
+						</tr>
+						<tr id="thead" style={{ color: "white"}}>
 							<th scope="col">Usuario</th>
 							<th scope="col">Rol</th>
 
@@ -93,10 +96,10 @@ export const Users = () => {
 					<tbody>
 						{users.map(user => (
 							<tr key={user.id}>
-								<td className="letra_tabla">{user.username}</td>
-								<td className="letra_tabla">{user.role}</td>
+								<td id="td" data-label="Usuario:" className="letra_tabla">{user.username}</td>
+								<td id="td" data-label="Rol:" className="letra_tabla">{user.role}</td>
 
-                                <td className="letra_tabla">{user.email}</td>
+                                <td id="td" data-label="Mail:" className="letra_tabla">{user.email}</td>
 								<td>
 									<button id="botonEliminar"
 										className="btn btn-danger mr-2 mb-2"
@@ -119,8 +122,8 @@ export const Users = () => {
 				</table>
 			)}
 			{showForm && (
-				<form>
-					<div style={{ color: "white"}}>
+				<form className="responsive-form">
+					<div className="form-group">
 						<label>username</label>
 						<input
 							type="text"
@@ -132,7 +135,7 @@ export const Users = () => {
 							}
 						/>
 					</div>
-					<div style={{ color: "white"}}>
+					<div className="form-group">
 						<label>role</label>
 						<textarea
 							value={userEditable.role}
@@ -143,8 +146,7 @@ export const Users = () => {
 							}
 						></textarea>
 					</div>
-
-                    <div style={{ color: "white"}}>
+                    <div className="form-group">
 						<label>Email</label>
 						<textarea
 							value={userEditable.email}
@@ -155,7 +157,6 @@ export const Users = () => {
 							}
 						></textarea>
 					</div>
-
 					{createOrEdit === "edit" && (
 						<button
 							type="button"

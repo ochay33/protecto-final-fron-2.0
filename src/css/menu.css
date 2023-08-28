@@ -1,12 +1,89 @@
-h3 {
+.menu-container {
+  padding: 20px;
+}
+h5{
+  color:white;
+  background-color: black !important;
+}
+h1{
   color: white;
 }
-.titulo {
+h2{
+  color: white !important;
+  background-color: black !important;
+}
+.menu-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.menu-content {
+  display: flex;
+  align-items: flex-start;
+}
+.menu-image {
+  flex: 1;
+  padding-right: 20px; /* Espacio entre la imagen y el formulario */
+}
+
+.menu-details {
+  flex: 2;
+}
+
+.menu-image img {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.menu-title h2 {
   color: black;
 }
-body {
-  background-image:url(../img/fondohome10.jpg);
-  /* background-repeat: no-repeat; */
-  background-size: cover;
-  background-position: center;
+
+.menu-description p {
+  color: black;
+  background-color: white;
+  margin-bottom: 10px;
+}
+
+.menu-inputs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.menu-input input {
+  width: 100%;
+  padding: 8px;
+}
+
+button {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+input {
+  text-align: center;
+}
+
+@media (max-width: 768px) {
+  .menu-content {
+    flex-direction: column;
+  }
+
+  .menu-image img {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  .menu-inputs {
+    margin-top: 10px;
+  }
+
+  button {
+    width: 100%;
+  }
 }

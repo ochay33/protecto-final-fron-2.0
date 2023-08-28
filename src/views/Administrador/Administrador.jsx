@@ -114,9 +114,12 @@ export const Administrador = () => {
 		<Container id="admin">
 			<h1>Admin</h1>
 			{!showForm && (
-				<table className="table" id="table">
+				<table id="responsive-table" className="table">
 					<thead className="thead-dark">
-						<tr style={{ color: "white"}}>
+					    <tr id="administrador">
+							<td>Administrador de Menus</td>
+						</tr>
+						<tr id="thead">
 							<th id="th" scope="col">Titulo</th>
 							<th id="th" scope="col">Detalle</th>
 							<th id="th" scope="col">Categoria</th>
@@ -127,12 +130,12 @@ export const Administrador = () => {
 					<tbody id="tbody">
 						{menues.map(menu => (
 							<tr key={menu.id}>
-								<th className="letra_tabla">{menu.title}</th>
-								<td className="letra_tabla">{menu.detail}</td>
-								<td className="letra_tabla">{menu.categoria}</td>
-								<td className="letra_tabla">{menu.precio}</td>
+								<td id="td" data-label="Titulo:" className="letra_tabla">{menu.title}</td>
+								<td id="td" data-label="Detalle:" className="letra_tabla">{menu.detail}</td>
+								<td id="td" data-label="Categoria:" className="letra_tabla">{menu.categoria}</td>
+								<td id="td" data-label="Precio:" className="letra_tabla">{menu.precio}</td>
 								<td>
-									<button id="botones"
+									<button id="botonEliminar"
 										className="btn btn-danger mr-2 mb-2"
 										onClick={() =>
 											handleDelete(menu.id, menu.title)
@@ -140,7 +143,7 @@ export const Administrador = () => {
 									>
 										Eliminar
 									</button>
-									<button id="botones"
+									<button id="botonEditar"
 										className="btn btn-warning mr-2 mb-2 "
 										onClick={() => handleEdit(menu)}
 									>
