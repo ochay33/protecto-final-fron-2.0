@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react"
 import Container from "react-bootstrap/Container"
 import axios from "axios"
+import { useNavigate } from "react-router-dom"
+
 
 import "../../css/orders.css"
 
@@ -9,18 +11,34 @@ export const Orders = () => {
 	const [orders, setOrders] = useState([])
 	const [showTable, setShowTable] = useState(false)
 	const [showButtons, setShowButtons] = useState(false);
+	const [isAdmin, setIsAdmin] = useState(false);
+	const navigate = useNavigate()
 
 
+	
+	
 	useEffect(() => {
 		fetch(`${import.meta.env.VITE_SERVER_URI}/api/read-Orders`)
 			.then(response => response.json())
 			.then(loquerecibo => setOrders(loquerecibo))
 	}, [])	
 
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem("user"));
+		if (user && user.role === "admin") {
+		  setIsAdmin(true);
+		} else {
+		  navigate("/");
+		}
+	}, [navigate]);   
+
 	const handleAcceptOrder = async (orderId) => {
 		try {
 			const resp = await axios.put(
-				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/accept`
+				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/accept`,
+				{
+					headers,
+				}
 			);
 	
 			if (resp.status === 200) {
@@ -37,7 +55,10 @@ export const Orders = () => {
 	const handleFinishOrder = async (orderId) => {
 		try {
 			const resp = await axios.put(
-				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/finish`
+				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/finish`,
+				{
+					headers,
+				}
 			);
 	
 			if (resp.status === 200) {
@@ -54,7 +75,10 @@ export const Orders = () => {
 	const handleSendOrder = async (orderId) => {
 		try {
 			const resp = await axios.put(
-				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/Send`
+				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/Send`,
+				{
+					headers,
+				}
 			);
 	
 			if (resp.status === 200) {
