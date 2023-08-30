@@ -3,9 +3,24 @@ body{
     justify-content: center;
     text-align: center;
 }
+.letra_tabla{
+    border: 1px solid #ccc;
+    padding: 0 8 0 8px;
+    border-right: 10px;
+}
+.divdatosclientes{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: auto;
+    width: auto;
+}
 .table{
     background-color: red;
     text-align: center;
+}
+.ul{
+    text-decoration: none !important;
 }
 tr {
     color: white;
@@ -53,11 +68,21 @@ tr {
     border-collapse: collapse;
     margin-bottom: 20px;
   }
+  .pDatosdel cliente{
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    width: auto;
+    word-break: break-all; /* Cambio realizado aquí */
+    max-height: 80px; /* Ajusta el valor según sea necesario */
+    overflow: hidden;
+  }
   
   #responsive-table th,
   #responsive-table td {
     padding: 8px;
     text-align: center;
+    
   }
 
 @media (max-width: 680px) {
@@ -68,6 +93,15 @@ tr {
       box-sizing: border-box;
       text-align: center;
     }
+    .letra_tabla{
+        border-bottom: 1px solid #ccc;
+    }
+    .pDatosdel cliente{
+        max-width: 235px;
+        display: flex;
+        flex-wrap: wrap;
+        height: none;
+    }
   
     #responsive-table th {
       font-weight: bold;
@@ -75,6 +109,9 @@ tr {
 
     .tr{
         display: none;
+    }
+    .divdatosclientes{
+        width: 235px;
     }
   
     #responsive-table td:before {

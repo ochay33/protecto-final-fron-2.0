@@ -77,8 +77,8 @@ export const Users = () => {
 
 
 	return (
-		<Container id="admin">
-			<h1>Admin</h1>
+		<Container id="admin" className="admin-container">
+			<h1 id="h1usuario" >Usuarios</h1>
 			{!showForm && (
 				<table id="responsive-table" className="table">
 					<thead className="thead-dark">

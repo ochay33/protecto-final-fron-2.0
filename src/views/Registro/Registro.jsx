@@ -66,10 +66,7 @@ export const Registro = () => {
 	}
  return (
 	 	<Container className="mt-4">
-	 		<Form
-	 			style={{ width: 500, margin: "auto", color: "white" }}
-				 onSubmit={formik.handleSubmit}
-	 		>
+	 		<Form onSubmit={formik.handleSubmit}>
 	 			<h1 style={{textAlign: "center"}}>Registro</h1>
 	 			<Form.Group className="mb-3" controlId="formBasicEmail">
 	 				<Form.Label>Mail</Form.Label>

@@ -9,7 +9,6 @@
 }
 Form{
     display: flex;
-    width: 100%;
     margin: auto;
     color: white ;
     flex-direction: column;

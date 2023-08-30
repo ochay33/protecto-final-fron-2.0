@@ -35,10 +35,7 @@ export const Orders = () => {
 	const handleAcceptOrder = async (orderId) => {
 		try {
 			const resp = await axios.put(
-				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/accept`,
-				{
-					headers,
-				}
+				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/accept`
 			);
 	
 			if (resp.status === 200) {
@@ -55,10 +52,7 @@ export const Orders = () => {
 	const handleFinishOrder = async (orderId) => {
 		try {
 			const resp = await axios.put(
-				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/finish`,
-				{
-					headers,
-				}
+				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/finish`
 			);
 	
 			if (resp.status === 200) {
@@ -75,10 +69,7 @@ export const Orders = () => {
 	const handleSendOrder = async (orderId) => {
 		try {
 			const resp = await axios.put(
-				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/Send`,
-				{
-					headers,
-				}
+				`${import.meta.env.VITE_SERVER_URI}/api/update-order-status/${orderId}/Send`
 			);
 	
 			if (resp.status === 200) {
@@ -120,7 +111,7 @@ export const Orders = () => {
 	
 	
 	return (
-		<Container id="admin">
+		<Container id="admin" className="admin-container">
 			<h1 className="h1">Pedidos</h1>
 				<table id="responsive-table" className="table">	    
 					<thead  className="thead-dark">
@@ -140,7 +131,7 @@ export const Orders = () => {
                         <tr key={order._id}>
                             <td className="letra_tabla" data-label="Datos del Cliente:"> 
                                 <ul>
-                                    <li>Nombre: {order.datos.name}</li>
+                                    <li><b>Nombre:</b>{order.datos.name}</li>
                                     <li>Telefono: {order.datos.phone}</li>
                                     <li>Direccion: {order.datos.address}</li>
                                  </ul>
@@ -225,11 +216,9 @@ export const Orders = () => {
                     .map((order) => (
                         <tr key={order._id}>
                             <td className="letra_tabla" data-label="Datos del Cliente:"> 
-                                <ul>
-                                    <li>Nombre: {order.datos.name}</li>
-                                    <li>Telefono: {order.datos.phone}</li>
-                                    <li>Direccion: {order.datos.address}</li>
-                                 </ul>
+                                    <p className="pDatosdel cliente"><b>*Nombre:</b> {order.datos.name}</p>
+                                    <p className="pDatosdel cliente"><b>*Telefono:</b> {order.datos.phone}</p>
+                                    <p className="pDatosdel cliente"><b>*Direccion: </b>{order.datos.address}</p>
                             </td>
                             <td className="letra_tabla" data-label="Menus:">
                                 {order.items.map((item) => (

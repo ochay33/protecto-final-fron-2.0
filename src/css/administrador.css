@@ -4,17 +4,28 @@
 }
 .letra_tabla{
     border: 1px solid #ccc;
-    border: 1px solid #ccc;
+    margin-right: 20px;
 }
-#label{
+.admin-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  #h1admin {
+    order: -1;
+  }
+#labels{
     display: flex;
     align-items: center;
     color: black;
+    width: auto !important;
 }
 #h3{
     display: flex;
     color: black;
     align-items: center;
+    justify-content: center;
 }
 #responsive-table {
     width: 100%;
@@ -36,21 +47,36 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 20px;
+    color: white;
 }
   
 .form-group {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 10px;
+    width: 100%;
+    max-width: 400px;
 }
   
 label {
     color: black;
     font-weight: bold;
+    margin-right: 10px;
+    width: auto !important;
 }
   
 input,
 textarea {
     width: 100%;
     margin-top: 4px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: white;
+    color: black;
+    text-align: center;
 }
   
 button {
@@ -69,7 +95,7 @@ h1{
 #admin{
     display: flex;
     flex-wrap: wrap;
-    width: 200vh;
+    width: 150vh;
 }
 #botoncrear{
     width: 100px;
@@ -90,15 +116,19 @@ form{
     #responsive-table th,
     #responsive-table td {
       display: grid;
-      width: 100%;
+      max-width: 275px;
       box-sizing: border-box;
       text-align: center;
+      padding: 4px;
     }
     #botonEliminar{
         width: 100%;
     }
     #botonEditar{
         width: 100%;
+    }
+    #admin{
+        width: auto !important;
     }
     #thead{
         display: none;
@@ -112,6 +142,9 @@ form{
   
     #responsive-table th {
       font-weight: bold;
+    }
+    #h1{
+        display: none;
     }
 
     #responsive-table td:before {

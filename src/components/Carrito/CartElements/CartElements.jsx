@@ -12,6 +12,8 @@ import { useData } from "../../DataContext/DataContext";
 import Modal from "react-bootstrap/Modal";
 import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
 
+import "../../../css/carrito.css"
+
 
 export const CartElements = () => {
 	const { cart, setCart } = useContext(DataContext);
@@ -185,11 +187,11 @@ export const CartElements = () => {
     };
         return ( 
             <>
-            <Table style={{backgroundColor:"gray", color:"white"}} striped bordered hover variant="dark">
+            <Table id="responsive-table1" striped bordered hover variant="dark">
             <thead >
-                <tr>
+                <tr id="tr">
                     <th>Nombre</th>
-                    <th>img</th>
+                    <th id="img">img</th>
                     <th>Precio</th>
                     <th>Detalles del pedido</th>
                     <th>Cantidad</th>
@@ -198,17 +200,17 @@ export const CartElements = () => {
             <tbody>
                 {cart.map(producto => (
                     <tr key={producto.id}>
-                        <td>{producto.title}</td>
-                        <td>
+                        <td id="td" data-label="Titulo:">{producto.title}</td>
+                        <td id="img">
                             <img
                                 height={60}
                                 src={producto.img}
                                 alt={producto.title}
                             />
                         </td>
-                        <td>{producto.precio}</td>
-                        <td>{inputValue1}</td>
-						            <td>{inputValue2}</td>
+                        <td id="td" data-label="Precio:">{producto.precio}</td>
+                        <td id="td" data-label="Detalles:">{inputValue1}</td>
+						            <td id="td" data-label="Cantidad:">{inputValue2}</td>
                         <td>
 							              <Button variant="danger" onClick={() => removeItemFromCart(producto.id)}>								
                                  Eliminar
@@ -232,8 +234,8 @@ export const CartElements = () => {
         </Button>
 		<br />
     <br />
-		<Form onSubmit={formik.handleSubmit} style={{backgroundColor:"gray", color:"white", display:"flex", flexDirection:"column", padding:"20px", border:"1px solid #ccc"}}>
-        <Form.Group className="mb-3" controlId="formBasicName">
+		<Form onSubmit={formik.handleSubmit} className="responsive-form1"  style={{backgroundColor:"gray", color:"white", display:"flex", flexDirection:"column", padding:"20px", border:"1px solid #ccc"}}>
+        <Form.Group  className="form-group1" controlId="formBasicName">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
             onChange={(e) => {
@@ -256,7 +258,7 @@ export const CartElements = () => {
             <div className="errorMessage">{formik.errors.name}</div>
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPhone">
+        <Form.Group  className="form-group1" controlId="formBasicPhone">
           <Form.Label>Telefono</Form.Label>
           <Form.Control
             onChange={(e) => {
@@ -279,7 +281,7 @@ export const CartElements = () => {
             <div className="errorMessage">{formik.errors.phone}</div>
           )}  
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicAddress">
+        <Form.Group  className="form-group1" controlId="formBasicAddress">
           <Form.Label>Direccion</Form.Label>
           <Form.Control
             onChange={(e) => {
@@ -302,22 +304,22 @@ export const CartElements = () => {
             <div className="errorMessage">{formik.errors.address}</div>
           )}  
         </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicCheckbox">
-          <Form.Check 
-            onChange={formik.handleChange}
-            value={formik.values.checkbox}
-            name="checkbox"
-            type="checkbox" 
-            label="Pago en efectivo"
-            onBlur={formik.handleBlur}
-            className={
-              formik.errors.checkbox &&
-              formik.touched.checkbox &&
-              "error"
-          } />
-          {formik.touched.checkbox && formik.errors.checkbox && (
-            <div className="errorMessage">{formik.errors.checkbox}</div>
-          )} 
+        <Form.Group  className="form-group1" controlId="formBasicCheckbox">
+          <div className="checkbox-label">
+            <Form.Check 
+              onChange={formik.handleChange}
+              value={formik.values.checkbox}
+              name="checkbox"
+              type="checkbox" 
+              label="Pago en efectivo"
+              onBlur={formik.handleBlur}
+              className={
+                formik.errors.checkbox &&
+                formik.touched.checkbox &&
+                "error"} />
+            {formik.touched.checkbox && formik.errors.checkbox && (
+              <div className="errorMessage">{formik.errors.checkbox}</div>)} 
+          </div>
         </Form.Group>
         <Button 
           variant="primary" 

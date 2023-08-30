@@ -111,8 +111,8 @@ export const Administrador = () => {
 		setShowButtons(false);
 	}
 	return (
-		<Container id="admin">
-			<h1>Admin</h1>
+		<Container id="admin" className="admin-container">
+			<h1 id="h1admin" >Admin</h1>
 			{!showForm && (
 				<table id="responsive-table" className="table">
 					<thead className="thead-dark">
@@ -157,55 +157,56 @@ export const Administrador = () => {
 			)}
 			{showButtons && ( <button onClick={handleCreate}>Crear nuevo</button>)}
 			{showForm && (
-				<form>
-					<div id="label">
-						<label><h3 id="h3" >Título</h3></label>
-						<input
-							type="text"
-							value={menuEditable.title}
-							onChange={event =>
-								setMenuEditable(prev => {
-									return { ...prev, title: event.target.value }
-								})
-							}
-						/>
+				<form className="responsive-form">
+					<div  className="form-group">
+						<label className="labes">
+							<h3 id="h3" >Título</h3>
+						    <input
+							   type="text"
+						   	   value={menuEditable.title}
+							   onChange={event => setMenuEditable(prev => {
+								return { ...prev, title: event.target.value }})}
+					        />
+						</label>
 					</div>
-					<div id="label">
-						<label><h4 id="h3" >Descripcion</h4></label>
-						<textarea
+					<div  className="form-group">
+						<label className="labes">
+							<h4 id="h3" >Descripcion</h4>
+						    <textarea
 							value={menuEditable.detail}
 							onChange={event =>
 								setMenuEditable(prev => {
-									return { ...prev, detail: event.target.value }
-								})
-							}
-						></textarea>
+									return { ...prev, detail: event.target.value }})}>   
+							</textarea>
+						</label>
 					</div>
-					<div id="label">
-						<label><h3 id="h3" >Categoria</h3></label>
-						<textarea
+					<div  className="form-group">
+						<label className="labes">
+							<h3 id="h3" >Categoria</h3>
+						    <textarea
 							value={menuEditable.categoria}
 							onChange={event =>
 								setMenuEditable(prev => {
 									return { ...prev, categoria: event.target.value }
-								})
-							}
-						></textarea>
+								})}>                   
+							</textarea>
+						</label>	
 					</div>
-					<div id="label">
-						<label><h3 id="h3" >Precio</h3></label>
-						<textarea
+					<div  className="form-group">
+						<label className="labes">
+							<h3 id="h3" >Precio</h3>
+						    <textarea
 							value={menuEditable.precio}
 							onChange={event =>
 								setMenuEditable(prev => {
-									return { ...prev, precio: event.target.value }
-								})
-							}
-						></textarea>
+									return { ...prev, precio: event.target.value }})}>
+							</textarea>
+						</label>
 					</div>
-					<div id="label">
-						<label><h3 id="h3" >Imagen</h3></label>
-						<input
+					<div  className="form-group">
+						<label className="labes">
+							<h3 id="h3" >Imagen</h3>
+						    <input
 							type="text"
 							value={menuEditable.img}
 							onChange={event =>
@@ -213,7 +214,8 @@ export const Administrador = () => {
 									return { ...prev, img: event.target.value }
 								})
 							}
-						/>
+						    />
+						</label>
 					</div>
 					{createOrEdit === "edit" && (
 						<button id="botoncrear" 
