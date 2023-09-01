@@ -115,14 +115,40 @@ export const CartElements = () => {
       onSubmit,
     })
     const handlePagoOnline = () => {
-      setShowDiv(true);
-      setShowDiv2(false);
+      if (cart.length === 0 ) {
+        alert("El carrito está vacío. Agrega productos antes de comprar.");
+      }
+      if (Object.keys(formik.values).length === 0){
+        alert("El formulario está vacío");
+      }
+       else {
+        if (Object.keys(formik.values).length === 0) {
+          alert(
+            "Por favor, completa todos los campos obligatorios de manera correcta."
+          );
+        } else {
+          setShowDiv(true);
+          setShowDiv2(false);
+        }
+      }   
     };
     const handleEnviarPedido = () => {
-      postUsuario();
-      setShowDiv( false);
-      setShowDiv2 (true);  
-    }
+      if (cart.length === 0) {
+        alert("El carrito está vacío. Agrega productos antes de comprar.");
+      } else {
+        if (Object.keys(formik.values).length === 0) {
+          alert(
+            "Por favor, completa todos los campos obligatorios de manera correcta."
+          );
+        } else {
+          postUsuario();
+          clearCart();
+          formik.resetForm();
+          setShowDiv( false);
+          setShowDiv2 (true); 
+        }  
+      }
+    };
 
     const handleSubmit = () => {
       if (cart.length === 0) {
@@ -139,6 +165,7 @@ export const CartElements = () => {
         }
       }
     };
+
 	const removeItemFromCart = (id) => {
 		setCart((prevCart) => prevCart.filter((item) => item.id !== id));
 	}
@@ -201,10 +228,7 @@ export const CartElements = () => {
         <Form.Group  className="form-group1" controlId="formBasicName">
           <Form.Label>Nombre</Form.Label>
           <Form.Control
-            onChange={(e) => {
-              formik.handleChange(e);
-              localStorage.setItem('formData', JSON.stringify(formik.values));
-            }}
+            onChange={formik.handleChange}
             type="text"
             name="name"
             className={
@@ -224,10 +248,7 @@ export const CartElements = () => {
         <Form.Group  className="form-group1" controlId="formBasicPhone">
           <Form.Label>Telefono</Form.Label>
           <Form.Control
-            onChange={(e) => {
-              formik.handleChange(e);
-              localStorage.setItem('formData', JSON.stringify(formik.values));
-            }}
+            onChange={formik.handleChange}
             type="number"
             name="phone"
             className={
@@ -247,10 +268,7 @@ export const CartElements = () => {
         <Form.Group  className="form-group1" controlId="formBasicAddress">
           <Form.Label>Direccion</Form.Label>
           <Form.Control
-            onChange={(e) => {
-              formik.handleChange(e);
-              localStorage.setItem('formData', JSON.stringify(formik.values));
-            }}
+            onChange={formik.handleChange}
             type="address"
             name="address"
             className={
@@ -300,11 +318,11 @@ export const CartElements = () => {
           Pago en efectivo
         </Button>
         <Button
+        disabled={!formik.isValid || cart.length === 0}
         variant="primary"
         className="btn btn-info btn-block mt-4"
         type="submit"
         onClick={handlePagoOnline}
-        disabled={!formik.isValid || cart.length === 0}
         >
         Pago Online
         </Button>

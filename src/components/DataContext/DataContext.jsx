@@ -1,33 +1,20 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useState, useContext} from "react";
 
 export const DataContext = createContext([]);
 
 export const DataProvider = ({ children }) => {
   const [cart, setCart] = useState([]);
 
-  const [inputValue1, setInputValue1] = useState(localStorage.getItem('inputValue1') || '');
-  const [inputValue2, setInputValue2] = useState(localStorage.getItem('inputValue2') || '');
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
-  }, []);
-
+  const [inputValue1, setInputValue1] = useState('');
+  const [inputValue2, setInputValue2] = useState('');
 
   const addCart = (producto) => {
     
     setCart((prev) => [...prev, { ...producto }]);
-    localStorage.setItem('cart', JSON.stringify([...cart, { ...producto }]));
-    localStorage.setItem('inputValue1', inputValue1);
-    localStorage.setItem('inputValue2', inputValue2);
+   
   };
   const clearCart = () => {
     setCart([]);
-    localStorage.removeItem('cart');
-    localStorage.removeItem('inputValue1', inputValue1);
-    localStorage.removeItem('inputValue2', inputValue2);
   };
   
 
