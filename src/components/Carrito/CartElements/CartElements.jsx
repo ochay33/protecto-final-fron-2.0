@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DataContext } from "../../DataContext/DataContext";
 import Table from "react-bootstrap/Table"
 import React from "react";
@@ -10,64 +10,21 @@ import { useFormik } from "formik"
 import * as Yup from "yup"
 import { useData } from "../../DataContext/DataContext";
 import Modal from "react-bootstrap/Modal";
-import { initMercadoPago, Wallet } from '@mercadopago/sdk-react'
+import QR from "../../../img/codigoQRNadir.png";
 
 import "../../../css/carrito.css"
 
-
 export const CartElements = () => {
 	const { cart, setCart } = useContext(DataContext);
-  const { inputValue1, inputValue2, setInputValue1, setInputValue2 } = useData();
+  const { inputValue1, inputValue2} = useData();
+  const [showDiv, setShowDiv] = useState(false);
+  const [showDiv2, setShowDiv2] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [orderInfo, setOrderInfo] = useState({
     orderId: "",
     orderStatus: ""
   });
 
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
-    }
-    const savedFormData = localStorage.getItem('formData');
-    if (savedFormData) {
-      formik.setValues(JSON.parse(savedFormData));
-    }
-    const savedInputValue1 = localStorage.getItem('inputValue1') || '';
-    setInputValue1(savedInputValue1);
-    const savedInputValue2 = localStorage.getItem('inputValue2') || '';
-    setInputValue2(savedInputValue2);
-  }, []);
-
-  const [preferenceId, setPreferenceId] = useState(null);
-  initMercadoPago('TEST-cbb3ea8b-f9de-48bb-8527-f9010b3b5736');
-
-  const CreatePreference = async ( title, price ) => {
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_SERVER_URI}/create_preference`,{
-          titulo: title,
-          price: price,
-          quantity: inputValue2,
-          currency_id: 'ARS',
-        });
-        const { id } = response.data;
-        return id;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-  const handleMercPago = async () => {
-    const preferencePromises = cart.map(async (producto) => {
-      return await CreatePreference(producto.title, producto.precio);
-    });
- 
-    const preferenceIds = await Promise.all(preferencePromises);
-    if (preferenceIds.length > 0) {
-      setPreferenceId(preferenceIds[0]);
-    }
-  };
-  
   const validationSchema = () =>
 	    Yup.object().shape({
 		    name: Yup.string()
@@ -157,6 +114,15 @@ export const CartElements = () => {
       validationSchema,
       onSubmit,
     })
+    const handlePagoOnline = () => {
+      setShowDiv(true);
+      setShowDiv2(false);
+    };
+    const handleEnviarPedido = () => {
+      postUsuario();
+      setShowDiv( false);
+      setShowDiv2 (true);  
+    }
 
     const handleSubmit = () => {
       if (cart.length === 0) {
@@ -180,10 +146,7 @@ export const CartElements = () => {
     const clearCart = () => {
     setCart([]);
     formik.resetForm();
-    localStorage.removeItem('cart');
-    localStorage.removeItem('inputValue1', inputValue1);
-    localStorage.removeItem('inputValue2', inputValue2);
-    localStorage.removeItem('formData', JSON.stringify(formik.values));
+  
     };
         return ( 
             <>
@@ -305,6 +268,7 @@ export const CartElements = () => {
           )}  
         </Form.Group>
         <Form.Group  className="form-group1" controlId="formBasicCheckbox">
+          {showDiv2 &&(
           <div className="checkbox-label">
             <Form.Check 
               onChange={formik.handleChange}
@@ -320,39 +284,54 @@ export const CartElements = () => {
             {formik.touched.checkbox && formik.errors.checkbox && (
               <div className="errorMessage">{formik.errors.checkbox}</div>)} 
           </div>
+          )}
         </Form.Group>
+        {showDiv2 &&(
+       <div>
+       <br />
+        <h6>Si tu pago es en efectivo haz click aqui</h6>
         <Button 
+          id="efectivo"
           variant="primary" 
           className="btn btn-info btn-block mt-4"
           type="submit" 
           onClick={handleSubmit}
           disabled={!formik.isValid || cart.length === 0 || !formik.values.checkbox}>
-          Comprar
+          Pago en efectivo
         </Button>
         <Button
         variant="primary"
         className="btn btn-info btn-block mt-4"
-        type="button"
-        onClick={handleMercPago}
+        type="submit"
+        onClick={handlePagoOnline}
         disabled={!formik.isValid || cart.length === 0}
         >
         Pago Online
         </Button>
-        {preferenceId && <Wallet initialization={{ preferenceId }} />}
         <br />
         <br />
-        <div className="enviar_pedido">
-        <h6>Si tu pago online fue aprobado hacer click aqui</h6>
-        <Button
-        variant="primary"
-        className="btn btn-info btn-block mt-4"
-        type="button"
-        onClick={postUsuario}
-        disabled={!formik.isValid || cart.length === 0}
-        >
-        Enviar Pedido 
-        </Button>
         </div>
+        )}
+        {showDiv && (
+        <div>
+          <div className="enviar_pedido">
+            <h6>Si finalizaste el pago online haz click aqui</h6>
+            <Button
+            variant="primary"
+            type="submit"
+            className="btn btn-info btn-block mt-4"
+            onClick={handleEnviarPedido}
+            disabled={!formik.isValid || cart.length === 0}
+            >
+            Enviar Pedido 
+            </Button>
+          </div>
+          <br />
+          <div className="qr-container">
+              <img src={QR}  alt=""  />
+          </div>
+        </div>
+        )}
     </Form>
         <Modal show={showModal} onHide={() =>setShowModal(false)}>
             <Modal.Header closeButton>
