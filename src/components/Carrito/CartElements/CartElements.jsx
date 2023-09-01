@@ -49,7 +49,7 @@ export const CartElements = () => {
           datos: formik.values,
           items: cart,
           detalles: inputValue1,
-          cantidad: inputValue2,
+          cantidad: parseFloat(inputValue2),
           total: total(),
 	}
 
