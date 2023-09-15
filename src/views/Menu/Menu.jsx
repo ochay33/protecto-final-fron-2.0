@@ -30,9 +30,10 @@ export const Menu = () => {
   }
   
 	const handleAddToCart = () => {
-    addCart({ ...menu })
-    alert("Producto agregado al carrito con exito!");
-    navigate("/menues")
+    const itemToAdd = { ...menu, detalles: inputValue1, cantidad: inputValue2 };
+    addCart(itemToAdd);
+    alert("Producto agregado al carrito con éxito!");
+    navigate("/menues");
   };
   return (
     <div className="menu-container">

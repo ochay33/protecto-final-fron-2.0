@@ -199,8 +199,8 @@ export const CartElements = () => {
                             />
                         </td>
                         <td id="td" data-label="Precio:">{producto.precio}</td>
-                        <td id="td" data-label="Detalles:">{inputValue1}</td>
-						            <td id="td" data-label="Cantidad:">{inputValue2}</td>
+                        <td id="td" data-label="Detalles:">{producto.detalles}</td>
+						            <td id="td" data-label="Cantidad:">{producto.cantidad}</td>
                         <td>
 							              <Button variant="danger" onClick={() => removeItemFromCart(producto.id)}>								
                                  Eliminar
