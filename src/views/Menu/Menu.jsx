@@ -33,6 +33,8 @@ export const Menu = () => {
     const itemToAdd = { ...menu, detalles: inputValue1, cantidad: inputValue2 };
     addCart(itemToAdd);
     alert("Producto agregado al carrito con éxito!");
+    setInputValue1("");
+    setInputValue2("");
     navigate("/menues");
   };
   return (
