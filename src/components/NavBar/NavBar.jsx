@@ -29,7 +29,7 @@ export const NavBar = () => {
 	return (
 		<Navbar id="navtotal">
 			<Container id="Container1">
-				<Navbar.Brand><img src={ logo2 } width={100} /></Navbar.Brand>
+				<Navbar.Brand><NavLink to="/"><img src={ logo2 } width={100} /></NavLink></Navbar.Brand>
 				<Navbar.Toggle aria-controls="responsive-navbar-nav" />
 				<Nav id="menunav" className="me-auto">
 					{localStorage.getItem("role") === "client"  && (
