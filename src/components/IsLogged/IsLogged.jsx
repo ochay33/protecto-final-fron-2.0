@@ -5,7 +5,7 @@ export const IsLogged = ({ children }) => {
 	const navigate = useNavigate()
 
 	useEffect(() => {
-		if (localStorage.getItem("usuario")) navigate("/")
+		if (localStorage.getItem("user")) navigate("/menues")
 	})
 
 	return children

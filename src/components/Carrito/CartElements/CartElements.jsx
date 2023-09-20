@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { useState } from "react";
+import { useState} from "react";
 import { DataContext } from "../../DataContext/DataContext";
 import Table from "react-bootstrap/Table"
 import React from "react";
@@ -24,7 +24,7 @@ export const CartElements = () => {
     orderId: "",
     orderStatus: ""
   });
-
+  
   const validationSchema = () =>
 	    Yup.object().shape({
 		    name: Yup.string()
@@ -74,12 +74,11 @@ export const CartElements = () => {
     console.error("Error:", error);
   }
 	};
-    const total = () =>
-    cart.reduce(
-        (acumulador, valorActual) =>
-        acumulador +  parseFloat(inputValue2) * valorActual.precio,
-        0,
-    )
+  const total = () =>
+    cart.reduce((acumulador, valorActual) => {
+      const cantidad = valorActual.cantidad || 1;
+      return acumulador + cantidad * valorActual.precio;
+  }, 0);
     const onSubmit = () => {
       if (cart.length === 0) {
         alert("El carrito está vacío. Agrega productos antes de comprar.");

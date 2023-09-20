@@ -1,5 +1,5 @@
 import { useState, useContext } from "react"
-import { NavLink, useNavigate } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import Container from "react-bootstrap/Container"
 import Nav from "react-bootstrap/Nav"
 import Navbar from "react-bootstrap/Navbar"
@@ -11,7 +11,6 @@ import "../../css/navbar.css"
 
 
 export const NavBar = () => {
-	const navigate = useNavigate()
 	const [cartItems] = useState([]);
 	const {cart} = useContext(DataContext)
 
@@ -20,8 +19,9 @@ export const NavBar = () => {
 			`Esta seguro que desea cerrar sesion?`
 		)
 		if (validator){
-		localStorage.clear()
-		navigate("/login")
+			localStorage.clear();		
+			window.location.reload();
+			window.location.href = "/";
 	    }
 	}
 	const cartItemCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);

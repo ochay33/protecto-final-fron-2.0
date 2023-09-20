@@ -49,7 +49,7 @@ export const Login = () => {
                 localStorage.setItem("user", JSON.stringify(data.user))
                 localStorage.setItem("role", data.user.role)
                 localStorage.setItem("token", data.token)
-                navigate("/menues")
+				window.location.href = "/menues";
             })
             .catch(err => {
                 if (err.response && err.response.status === 401) {

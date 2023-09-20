@@ -11,10 +11,19 @@ import { Nosotros } from "../../views/Nosotros/Nosotros"
 import { CartElements } from "../../components/Carrito/CartElements/CartElements"
 import { Orders } from "../../views/Orders/Orders"
 import { Users } from "../../views/Users"
+import { IsNotLogged } from "../../components/IsNotLogged/IsNotLogged"
 
 
 export const routes = [
-	{ path: "/", element: <Home /> },
+	{ 
+		path: "/", 
+		element: (
+			<IsLogged>
+		        <Home /> 
+		    </IsLogged>
+		),
+	},
+
 	{
 		path: "/login",
 		element: (
@@ -23,15 +32,54 @@ export const routes = [
 			</IsLogged>
 		),
 	},
-	{ path: "/menues", element: <Menues /> },
-	{ path: "/registro", element: <Registro /> },
-	{ path: "/menu/:menuId", element: <Menu /> },
+	
+	{ 
+		path: "/registro",
+		element: (
+			<IsLogged>
+		        <Registro /> 
+			</IsLogged>	  
+		),
+	},
+
 	{ path: "/contacto", element: <Contacto /> },
 	{ path: "/nosotros", element: <Nosotros /> },
-	{ path : "/carrito" , element: <CartElements /> },
-    { path : "/orders", element: <Orders /> },
-	
 
+	{ 
+		path: "/menu/:menuId", 
+		element: (
+			<IsNotLogged>	
+		        <Menu /> 
+			</IsNotLogged>
+		),
+	},
+
+	{ 
+		path : "/carrito" , 
+		element: (
+			<IsNotLogged>
+		        <CartElements /> 
+		    </IsNotLogged>
+		),
+	},
+
+	{ 
+		path: "/menues", 
+		element: (
+			<IsNotLogged>
+		        <Menues />
+			</IsNotLogged>
+		),
+	},
+
+    { 
+		path : "/orders", 
+		element: (
+		    <IsAdmin>
+		        <Orders />
+		    </IsAdmin>
+		),
+	},
 	{
 		path:"/users" ,
 		element : (
@@ -40,6 +88,7 @@ export const routes = [
 			</IsAdmin>
 		),
 	},
+	
 	{
 		path: "administrador",
 		element: (
